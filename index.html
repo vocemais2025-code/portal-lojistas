@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portal do Lojista Informado | você-mais+</title>
   <meta property="og:title"       content="Portal do Lojista Informado | você-mais+" />
-  <meta property="og:description" content="Benefício exclusivo para lojistas parceiros Você Mais+. Análises de produto, argumentos de venda e benefícios comprovados — atualizados todo dia às 7h." />
+  <meta property="og:description" content="Fichas de produto, argumentos de venda e inteligência de mercado para lojistas parceiros Você Mais+." />
   <meta property="og:image"       content="https://lojistas.voce-mais.com/thumb.png" />
   <meta property="og:url"         content="https://lojistas.voce-mais.com/" />
   <meta property="og:type"        content="website" />
@@ -13,7 +13,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
       --navy:     #00276e;
       --yellow:   #feda14;
@@ -26,82 +25,117 @@
       --gray-600: #6b6b6b;
       --gray-800: #2e2e2e;
       --border:   rgba(0,0,0,0.09);
+      --c-saude:    #00276e;
+      --c-beleza:   #b5006e;
+      --c-energia:  #b71c1c;
+      --c-emagrec:  #e65100;
+      --c-imunidade:#1b5e20;
+      --c-sono:     #4527a0;
     }
-
     body { font-family:'Inter',sans-serif; background:var(--white); color:var(--black); -webkit-font-smoothing:antialiased; }
 
-    /* ─── PASSWORD GATE ──────────────────────────────────── */
-    .gate-overlay {
-      position:fixed; inset:0; z-index:2000;
-      background:var(--navy);
-      display:flex; align-items:center; justify-content:center;
-      padding:24px;
-      transition:opacity .35s;
-    }
-    .gate-box {
-      width:100%; max-width:420px; text-align:center;
-    }
+    /* GATE */
+    .gate-overlay { position:fixed; inset:0; z-index:2000; background:var(--navy); display:flex; align-items:center; justify-content:center; padding:24px; transition:opacity .35s; }
+    .gate-box { width:100%; max-width:420px; text-align:center; }
     .gate-logo { height:28px; opacity:.85; margin-bottom:36px; display:block; margin-left:auto; margin-right:auto; }
     .gate-eyebrow { font-size:10px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.35); margin-bottom:14px; }
     .gate-title { font-size:30px; font-weight:900; color:var(--white); letter-spacing:-.03em; line-height:1.18; margin-bottom:14px; }
     .gate-desc { font-size:13.5px; color:rgba(255,255,255,.52); line-height:1.65; margin-bottom:34px; }
-    .gate-input {
-      width:100%; padding:15px 18px; border-radius:10px;
-      border:1px solid rgba(255,255,255,.18);
-      background:rgba(255,255,255,.08);
-      color:var(--white); font-family:inherit; font-size:15px;
-      outline:none; margin-bottom:10px;
-      transition:border-color .2s;
-    }
+    .gate-input { width:100%; padding:15px 18px; border-radius:10px; border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.08); color:var(--white); font-family:inherit; font-size:15px; outline:none; margin-bottom:10px; transition:border-color .2s; }
     .gate-input::placeholder { color:rgba(255,255,255,.3); }
     .gate-input:focus { border-color:rgba(254,218,20,.5); }
     .gate-input.error { border-color:rgba(255,100,100,.6); }
     .gate-error { font-size:12px; color:#ff7b7b; margin-bottom:14px; min-height:18px; }
-    .gate-btn {
-      width:100%; padding:15px; border-radius:10px; border:none;
-      background:var(--yellow); color:var(--navy);
-      font-family:inherit; font-size:14px; font-weight:800;
-      letter-spacing:.06em; cursor:pointer;
-      transition:opacity .15s, transform .15s;
-    }
+    .gate-btn { width:100%; padding:15px; border-radius:10px; border:none; background:var(--yellow); color:var(--navy); font-family:inherit; font-size:14px; font-weight:800; letter-spacing:.06em; cursor:pointer; transition:opacity .15s,transform .15s; }
     .gate-btn:hover { opacity:.9; transform:translateY(-1px); }
     .gate-badge { margin-top:24px; font-size:11px; color:rgba(255,255,255,.22); }
 
-    /* ─── HEADER ─────────────────────────────────────────── */
+    /* HEADER */
     header { background:var(--white); border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; }
     .header-inner { max-width:1280px; margin:0 auto; padding:0 40px; height:64px; display:flex; align-items:center; justify-content:space-between; }
     .logo-wrap { display:flex; align-items:center; gap:16px; text-decoration:none; }
-    .logo-img  { height:22px; width:auto; }
+    .logo-img { height:22px; width:auto; }
     .logo-divider { width:1px; height:20px; background:var(--gray-200); }
     .logo-sub { font-size:10px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--gray-400); }
     nav { display:flex; gap:2px; }
-    nav a { font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--gray-600); text-decoration:none; padding:6px 14px; border-radius:100px; transition:all .15s; }
+    nav a { font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--gray-600); text-decoration:none; padding:6px 14px; border-radius:100px; transition:all .15s; cursor:pointer; }
     nav a:hover  { color:var(--navy); background:var(--gray-50); }
     nav a.active { color:var(--navy); background:var(--yellow); }
     .header-date { font-size:11px; font-weight:500; color:var(--gray-400); }
 
-    /* ─── ALERT STRIP ────────────────────────────────────── */
+    /* ALERT STRIP */
     .alert-strip { background:var(--navy); color:var(--white); padding:11px 40px; display:flex; align-items:center; justify-content:center; gap:20px; }
     .alert-badge { font-size:9px; font-weight:800; letter-spacing:0.14em; text-transform:uppercase; background:var(--yellow); color:var(--navy); padding:4px 10px; border-radius:100px; white-space:nowrap; }
     .alert-text  { font-size:12.5px; opacity:.9; }
     .alert-text strong { font-weight:700; }
 
-    /* ─── MAIN ───────────────────────────────────────────── */
-    main { max-width:1280px; margin:0 auto; padding:48px 40px 80px; }
+    /* VIEWS */
+    .view { display:none; }
+    .view.active { display:block; }
+    main { max-width:1280px; margin:0 auto; padding:40px 40px 80px; }
+
+    /* CATALOG */
+    .catalog-top { display:flex; align-items:center; gap:14px; margin-bottom:24px; flex-wrap:wrap; }
+    .search-input { flex:1; min-width:220px; padding:11px 16px; border-radius:10px; border:1px solid var(--border); font-family:inherit; font-size:13px; outline:none; transition:border-color .2s; }
+    .search-input:focus { border-color:var(--navy); }
+    .line-filters { display:flex; gap:8px; flex-wrap:wrap; }
+    .lf-btn { font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:7px 14px; border-radius:100px; border:1px solid var(--border); background:var(--white); color:var(--gray-600); cursor:pointer; transition:all .15s; font-family:inherit; }
+    .lf-btn:hover { border-color:var(--navy); color:var(--navy); }
+    .lf-btn.active { background:var(--navy); color:var(--white); border-color:var(--navy); }
+    .product-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:14px; }
+
+    /* PRODUCT CARD */
+    .prod-card { border-radius:14px; padding:22px; border:1px solid var(--border); background:var(--white); cursor:pointer; transition:all .18s; display:flex; flex-direction:column; position:relative; }
+    .prod-card:hover { transform:translateY(-3px); box-shadow:0 10px 30px rgba(0,0,0,.09); border-color:transparent; }
+    .prod-card.coming-soon { opacity:.5; cursor:default; pointer-events:none; }
+    .prod-line-bar { height:3px; border-radius:2px; margin-bottom:14px; }
+    .bg-saude    { background:var(--c-saude); }
+    .bg-beleza   { background:var(--c-beleza); }
+    .bg-energia  { background:var(--c-energia); }
+    .bg-emagrec  { background:var(--c-emagrec); }
+    .bg-imunidade{ background:var(--c-imunidade); }
+    .bg-sono     { background:var(--c-sono); }
+    .prod-line-badge { font-size:8px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; padding:3px 9px; border-radius:100px; margin-bottom:10px; display:inline-block; color:var(--white); }
+    .prod-num { position:absolute; top:18px; right:18px; font-size:10px; font-weight:700; color:var(--gray-400); }
+    .prod-name { font-size:16px; font-weight:800; letter-spacing:-.02em; line-height:1.2; margin-bottom:6px; }
+    .prod-tagline { font-size:11.5px; color:var(--gray-600); line-height:1.45; margin-bottom:14px; flex:1; }
+    .prod-tags { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:16px; }
+    .prod-tag { font-size:8.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:3px 8px; border-radius:100px; background:var(--gray-100); color:var(--gray-600); }
+    .prod-cta { display:flex; align-items:center; justify-content:space-between; margin-top:auto; }
+    .prod-cta-label { font-size:9.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--gray-400); }
+    .prod-arrow { width:30px; height:30px; border-radius:50%; background:var(--navy); color:var(--white); display:flex; align-items:center; justify-content:center; font-size:13px; }
+    .coming-badge { font-size:9px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; padding:3px 9px; border-radius:100px; background:var(--gray-100); color:var(--gray-400); }
+
+    /* KITS */
+    .kits-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:14px; }
+    .kit-card { border-radius:14px; padding:24px; border:1px solid var(--border); background:var(--white); }
+    .kit-num { font-size:9px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--gray-400); margin-bottom:8px; }
+    .kit-name { font-size:18px; font-weight:800; letter-spacing:-.025em; margin-bottom:6px; }
+    .kit-tagline { font-size:12px; color:var(--gray-600); margin-bottom:14px; line-height:1.4; }
+    .kit-products { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px; }
+    .kit-prod-badge { font-size:9.5px; font-weight:700; padding:4px 10px; border-radius:100px; background:var(--navy); color:var(--white); }
+    .kit-desc { font-size:12px; line-height:1.55; color:var(--gray-600); }
+
+    /* OBJECTIVES */
+    .obj-pills { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:28px; }
+    .obj-pill { display:flex; align-items:center; gap:7px; padding:10px 18px; border-radius:100px; border:1.5px solid var(--border); background:var(--white); cursor:pointer; transition:all .15s; font-family:inherit; }
+    .obj-pill:hover { border-color:var(--navy); }
+    .obj-pill.active { background:var(--navy); border-color:var(--navy); }
+    .obj-pill-emoji { font-size:15px; }
+    .obj-pill-label { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--gray-600); }
+    .obj-pill.active .obj-pill-label { color:var(--white); }
+    .obj-result-label { font-size:10px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--gray-400); margin-bottom:16px; }
+
+    /* TODAY VIEW */
     .edition-bar { display:flex; align-items:center; justify-content:space-between; margin-bottom:28px; padding-bottom:20px; border-bottom:1px solid var(--border); }
     .edition-live { display:flex; align-items:center; gap:10px; }
     .live-dot { width:7px; height:7px; background:var(--navy); border-radius:50%; animation:blink 1.8s infinite; }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
     .edition-label { font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--navy); }
     .edition-meta  { font-size:11px; color:var(--gray-400); }
-
-    /* ─── GRID ───────────────────────────────────────────── */
     .grid { display:grid; grid-template-columns:repeat(12,1fr); grid-auto-rows:76px; gap:14px; }
-
-    /* ─── CARDS ──────────────────────────────────────────── */
     .card { border-radius:14px; padding:26px; position:relative; overflow:hidden; display:flex; flex-direction:column; justify-content:space-between; transition:transform .18s,box-shadow .18s; cursor:pointer; }
     .card:hover { transform:translateY(-3px); box-shadow:0 14px 36px rgba(0,0,0,.10); }
-
     .c-hero  { grid-column:span 7; grid-row:span 5; }
     .c-tall  { grid-column:span 5; grid-row:span 5; }
     .c-wide  { grid-column:span 8; grid-row:span 4; }
@@ -109,229 +143,199 @@
     .c-sm    { grid-column:span 4; grid-row:span 4; }
     .c-third { grid-column:span 4; grid-row:span 3; }
     .c-full  { grid-column:span 12; grid-row:span 3; }
-
-    .bg-navy    { background:var(--navy);    color:var(--white); }
-    .bg-yellow  { background:var(--yellow);  color:var(--navy);  }
-    .bg-black   { background:var(--black);   color:var(--white); }
-    .bg-gray800 { background:var(--gray-800);color:var(--white); }
-    .bg-gray100 { background:var(--gray-100);color:var(--black); }
-    .bg-white   { background:var(--white);   color:var(--black); border:1px solid var(--border); }
-
+    .bg-navy    { background:var(--navy);     color:var(--white); }
+    .bg-yellow  { background:var(--yellow);   color:var(--navy);  }
+    .bg-black   { background:var(--black);    color:var(--white); }
+    .bg-gray800 { background:var(--gray-800); color:var(--white); }
+    .bg-gray100 { background:var(--gray-100); color:var(--black); }
+    .bg-white   { background:var(--white);    color:var(--black); border:1px solid var(--border); }
     .tag { display:inline-flex; align-items:center; gap:5px; font-size:9px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; padding:4px 10px; border-radius:100px; width:fit-content; }
     .bg-navy .tag,.bg-black .tag,.bg-gray800 .tag { background:rgba(255,255,255,.15); color:var(--white); }
     .bg-yellow .tag  { background:rgba(0,39,110,.12); color:var(--navy); }
     .bg-gray100 .tag,.bg-white .tag { background:var(--navy); color:var(--white); }
     .tag-dot { width:4px; height:4px; border-radius:50%; background:currentColor; opacity:.6; }
-
     .headline { font-size:clamp(15px,2vw,24px); font-weight:800; line-height:1.15; letter-spacing:-.025em; margin-top:10px; }
     .c-hero .headline { font-size:clamp(22px,2.8vw,36px); }
     .c-full .headline { font-size:clamp(16px,2vw,26px); max-width:900px; }
     .sub { font-size:12px; line-height:1.55; margin-top:8px; opacity:.72; }
-
-    .stat-num  { font-size:clamp(36px,5vw,60px); font-weight:900; letter-spacing:-.04em; line-height:1; margin:10px 0 4px; }
-    .stat-desc { font-size:11px; font-weight:500; line-height:1.45; opacity:.70; }
-
     .card-foot { display:flex; align-items:center; justify-content:space-between; margin-top:14px; }
     .cta-label { font-size:9.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; opacity:.50; }
     .arrow-btn { width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
     .bg-navy .arrow-btn,.bg-black .arrow-btn,.bg-gray800 .arrow-btn { background:rgba(255,255,255,.15); }
     .bg-yellow .arrow-btn { background:rgba(0,39,110,.12); }
     .bg-gray100 .arrow-btn,.bg-white .arrow-btn { background:var(--navy); color:var(--white); }
-
     .accent-bar { display:block; width:28px; height:3px; background:var(--yellow); border-radius:2px; margin-bottom:12px; }
     .bg-yellow .accent-bar { background:var(--navy); }
-    .plus-deco  { position:absolute; right:20px; font-size:52px; font-weight:900; opacity:.08; pointer-events:none; }
 
-    /* ─── SECTION HEADER ─────────────────────────────────── */
-    .section-hd { display:flex; align-items:center; gap:16px; margin:44px 0 20px; }
-    .section-hd-label { font-size:10px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--gray-600); white-space:nowrap; }
-    .section-hd-line  { flex:1; height:1px; background:var(--border); }
-
-    /* ─── MODAL ──────────────────────────────────────────── */
-    .modal-overlay {
-      position:fixed; inset:0; z-index:500;
-      background:rgba(0,20,55,.55);
-      backdrop-filter:blur(6px);
-      display:flex; align-items:center; justify-content:center;
-      padding:24px;
-      opacity:0; pointer-events:none;
-      transition:opacity .22s;
-    }
+    /* MODAL */
+    .modal-overlay { position:fixed; inset:0; z-index:500; background:rgba(0,20,55,.55); backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; padding:24px; opacity:0; pointer-events:none; transition:opacity .22s; }
     .modal-overlay.open { opacity:1; pointer-events:all; }
-
-    .modal {
-      background:var(--white); border-radius:20px;
-      width:100%; max-width:640px; max-height:88vh; overflow-y:auto;
-      box-shadow:0 32px 80px rgba(0,0,0,.22);
-      transform:translateY(20px); transition:transform .25s;
-      position:relative;
-    }
+    .modal { background:var(--white); border-radius:20px; width:100%; max-width:660px; max-height:90vh; overflow-y:auto; box-shadow:0 32px 80px rgba(0,0,0,.22); transform:translateY(20px); transition:transform .25s; position:relative; }
     .modal-overlay.open .modal { transform:translateY(0); }
-
-    .modal-header { background:var(--navy); border-radius:20px 20px 0 0; padding:28px 32px 24px; position:relative; }
-    .modal-tag    { display:inline-flex; align-items:center; gap:5px; font-size:9px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; padding:4px 10px; border-radius:100px; background:rgba(255,255,255,.15); color:var(--white); margin-bottom:12px; }
-    .modal-headline { font-size:22px; font-weight:800; line-height:1.2; letter-spacing:-.02em; color:var(--white); }
-    .modal-stars  { font-size:16px; margin-top:8px; }
-    .modal-close  { position:absolute; top:20px; right:20px; width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,.15); border:none; color:var(--white); font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .15s; }
+    .modal-hdr { background:var(--navy); border-radius:20px 20px 0 0; padding:28px 32px 24px; position:relative; }
+    .modal-close { position:absolute; top:20px; right:20px; width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,.15); border:none; color:var(--white); font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
     .modal-close:hover { background:rgba(255,255,255,.28); }
-
+    /* Product modal header */
+    .mp-line-badge { display:inline-block; font-size:8.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; padding:3px 10px; border-radius:100px; background:rgba(255,255,255,.2); color:var(--white); margin-bottom:10px; }
+    .mp-name { font-size:24px; font-weight:900; color:var(--white); letter-spacing:-.03em; line-height:1.15; margin-bottom:6px; }
+    .mp-format { font-size:12px; color:rgba(255,255,255,.5); }
+    /* News modal header */
+    .modal-tag { display:inline-flex; align-items:center; gap:5px; font-size:9px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; padding:4px 10px; border-radius:100px; background:rgba(255,255,255,.15); color:var(--white); margin-bottom:12px; }
+    .modal-headline { font-size:22px; font-weight:800; line-height:1.2; letter-spacing:-.02em; color:var(--white); }
+    .modal-stars { font-size:16px; margin-top:8px; }
+    /* Modal body */
     .modal-body { padding:28px 32px 32px; }
-    .modal-section { margin-bottom:24px; }
-    .modal-section-title { font-size:9px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--gray-400); margin-bottom:8px; padding-bottom:8px; border-bottom:1px solid var(--border); }
-    .modal-text { font-size:14px; line-height:1.65; color:var(--black); }
-
+    .modal-sec { margin-bottom:22px; }
+    .modal-sec-title { font-size:9px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--gray-400); margin-bottom:10px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+    .modal-text { font-size:13.5px; line-height:1.65; color:var(--black); }
+    .modal-list { list-style:none; display:flex; flex-direction:column; gap:6px; }
+    .modal-list li { font-size:13px; line-height:1.5; padding-left:16px; position:relative; }
+    .modal-list li::before { content:"·"; position:absolute; left:0; color:var(--navy); font-weight:900; }
+    .modal-script { background:var(--gray-50); border-left:3px solid var(--navy); border-radius:0 8px 8px 0; padding:12px 16px; margin-bottom:10px; font-size:13px; line-height:1.55; font-style:italic; }
+    .modal-qa { margin-bottom:12px; }
+    .modal-qa-q { font-size:12px; font-weight:700; color:var(--gray-600); margin-bottom:4px; }
+    .modal-qa-r { font-size:13px; line-height:1.5; }
+    .modal-combina { display:flex; flex-wrap:wrap; gap:8px; }
+    .combina-badge { font-size:11px; font-weight:600; padding:6px 12px; border-radius:100px; border:1px solid var(--border); background:var(--white); color:var(--navy); }
+    .modal-balcao { background:var(--navy); border-radius:12px; padding:20px; color:var(--white); }
+    .balcao-accent { display:inline-block; width:20px; height:3px; background:var(--yellow); border-radius:2px; margin-bottom:10px; }
+    .balcao-lbl { font-size:9px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; opacity:.5; margin-bottom:8px; }
+    .balcao-text { font-size:14px; font-weight:600; line-height:1.55; }
+    /* News modal body */
     .modal-source { display:flex; align-items:center; gap:8px; margin-top:12px; }
     .modal-source-label { font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--gray-400); }
     .modal-source-val   { font-size:12px; font-weight:500; color:var(--navy); }
-
     .modal-scores { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
-    .score-item   { background:var(--gray-50); border:1px solid var(--border); border-radius:10px; padding:14px; text-align:center; }
-    .score-num    { font-size:26px; font-weight:900; color:var(--navy); line-height:1; }
-    .score-label  { font-size:9px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--gray-400); margin-top:4px; }
-
-    .modal-idea       { background:var(--navy); border-radius:12px; padding:18px 20px; color:var(--white); }
-    .modal-idea-accent{ display:inline-block; width:20px; height:3px; background:var(--yellow); border-radius:2px; margin-bottom:10px; }
-    .modal-idea-label { font-size:9px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; opacity:.5; margin-bottom:6px; }
-    .modal-idea-text  { font-size:14px; font-weight:600; line-height:1.5; }
-
-    .modal-fit { margin-top:24px; }
+    .score-item { background:var(--gray-50); border:1px solid var(--border); border-radius:10px; padding:14px; text-align:center; }
+    .score-num  { font-size:26px; font-weight:900; color:var(--navy); line-height:1; }
+    .score-label{ font-size:9px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--gray-400); margin-top:4px; }
+    .modal-idea { background:var(--navy); border-radius:12px; padding:18px 20px; color:var(--white); }
+    .idea-accent{ display:inline-block; width:20px; height:3px; background:var(--yellow); border-radius:2px; margin-bottom:10px; }
+    .idea-lbl   { font-size:9px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; opacity:.5; margin-bottom:6px; }
+    .idea-text  { font-size:14px; font-weight:600; line-height:1.5; }
+    .modal-fit  { margin-top:24px; }
     .modal-fit-title { font-size:9px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--gray-400); margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid var(--border); }
-    .modal-fit-btns  { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
-    .modal-fit-btn   { background:var(--gray-50); border:1px solid var(--border); border-radius:10px; padding:16px 10px; text-align:center; cursor:pointer; transition:all .15s; font-family:inherit; }
-    .modal-fit-btn:hover { border-color:var(--navy); background:var(--white); transform:translateY(-2px); box-shadow:0 4px 16px rgba(0,39,110,.08); }
+    .modal-fit-btns { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+    .modal-fit-btn { background:var(--gray-50); border:1px solid var(--border); border-radius:10px; padding:16px 10px; text-align:center; cursor:pointer; transition:all .15s; font-family:inherit; }
+    .modal-fit-btn:hover { border-color:var(--navy); }
     .modal-fit-btn.selected { border-color:var(--navy); background:var(--navy); color:var(--white); }
     .modal-fit-btn.selected .fit-label { color:var(--white); }
-    .fit-emoji  { font-size:24px; display:block; margin-bottom:6px; }
-    .fit-label  { font-size:9px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--gray-600); }
+    .fit-emoji { font-size:24px; display:block; margin-bottom:6px; }
+    .fit-label { font-size:9px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--gray-600); }
 
-    /* ─── ARCHIVE ────────────────────────────────────────── */
+    /* ARCHIVE */
     .archive { background:var(--gray-50); border-top:1px solid var(--border); padding:56px 40px; }
     .archive-inner { max-width:1280px; margin:0 auto; }
-    .archive-hd    { display:flex; align-items:center; gap:16px; margin-bottom:28px; }
+    .archive-hd { display:flex; align-items:center; gap:16px; margin-bottom:28px; }
     .archive-title { font-size:10px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--gray-400); white-space:nowrap; }
-    .archive-line  { flex:1; height:1px; background:var(--border); }
-    .archive-grid  { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:10px; }
+    .archive-line { flex:1; height:1px; background:var(--border); }
+    .archive-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:10px; }
     .archive-empty { font-size:13px; color:var(--gray-400); }
-    .archive-card  { display:block; text-decoration:none; color:var(--black); background:var(--white); padding:18px 20px; border-radius:10px; border:1px solid var(--border); transition:all .15s; }
+    .archive-card { display:block; text-decoration:none; color:var(--black); background:var(--white); padding:18px 20px; border-radius:10px; border:1px solid var(--border); transition:all .15s; }
     .archive-card:hover { border-color:var(--navy); box-shadow:0 4px 16px rgba(0,39,110,.09); transform:translateY(-2px); }
-    .archive-date  { font-size:9px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--white); background:var(--navy); display:inline-block; padding:3px 8px; border-radius:4px; margin-bottom:9px; }
-    .archive-hl    { font-size:12px; font-weight:600; line-height:1.4; margin-bottom:9px; }
-    .archive-tags  { display:flex; flex-wrap:wrap; gap:4px; }
+    .archive-date { font-size:9px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--white); background:var(--navy); display:inline-block; padding:3px 8px; border-radius:4px; margin-bottom:9px; }
+    .archive-hl { font-size:12px; font-weight:600; line-height:1.4; margin-bottom:9px; }
+    .archive-tags { display:flex; flex-wrap:wrap; gap:4px; }
     .archive-tags span { font-size:8.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:3px 7px; border-radius:100px; background:var(--gray-100); color:var(--gray-600); }
 
-    /* ─── FOOTER ─────────────────────────────────────────── */
+    /* FOOTER */
     footer { background:var(--navy); color:var(--white); padding:36px 40px; }
-    .footer-inner   { max-width:1280px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; }
-    .footer-brand   { display:flex; align-items:center; gap:14px; }
-    .footer-sep     { width:1px; height:16px; background:rgba(255,255,255,.2); }
+    .footer-inner { max-width:1280px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; }
+    .footer-brand { display:flex; align-items:center; gap:14px; }
+    .footer-sep { width:1px; height:16px; background:rgba(255,255,255,.2); }
     .footer-tagline { font-size:11px; font-weight:500; opacity:.45; letter-spacing:.06em; }
-    .footer-note    { font-size:11px; opacity:.35; }
+    .footer-note { font-size:11px; opacity:.35; }
 
-    /* ─── CROSS-EDITION VIEW ─────────────────────────────── */
-    #cross-edition-view { display:none; }
-
-    /* ─── RESPONSIVE ─────────────────────────────────────── */
+    /* RESPONSIVE */
     @media(max-width:900px){
       .header-inner{padding:0 20px;} nav{display:none;}
-      main{padding:28px 20px 60px;}
+      main{padding:24px 20px 60px;}
       .grid{grid-template-columns:1fr 1fr;grid-auto-rows:100px;gap:10px;}
       .c-hero,.c-wide{grid-column:span 2;grid-row:span 3;}
       .c-tall,.c-med{grid-column:span 2;grid-row:span 3;}
       .c-sm,.c-third{grid-column:span 1;grid-row:span 2;}
       .c-full{grid-column:span 2;grid-row:span 2;}
       .alert-strip{flex-direction:column;gap:6px;padding:12px 20px;text-align:center;}
-      .archive{padding:40px 20px;}
-      .footer-inner{flex-direction:column;gap:12px;text-align:center;}
-      .modal{border-radius:16px;} .modal-header{padding:24px;border-radius:16px 16px 0 0;}
-      .modal-headline{font-size:18px;} .modal-body{padding:22px 24px 28px;}
-      .gate-title{font-size:24px;}
+      .archive{padding:40px 20px;} .footer-inner{flex-direction:column;gap:12px;text-align:center;}
+      .modal{border-radius:16px;} .modal-hdr{padding:24px;border-radius:16px 16px 0 0;}
+      .mp-name{font-size:20px;} .modal-body{padding:22px 24px 28px;}
+      .gate-title{font-size:24px;} .product-grid{grid-template-columns:1fr 1fr;}
+      .kits-grid{grid-template-columns:1fr;}
     }
+    @media(max-width:500px){ .product-grid{grid-template-columns:1fr;} }
   </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════════════════
-     PORTÃO DE SENHA
-════════════════════════════════════════════════════════ -->
+<!-- GATE -->
 <div class="gate-overlay" id="gate">
   <div class="gate-box">
     <img class="gate-logo" src="logo-branca.png" alt="você-mais+" />
     <div class="gate-eyebrow">Acesso restrito · Parceiros</div>
     <div class="gate-title">Portal do Lojista<br>Informado</div>
-    <div class="gate-desc">Benefício exclusivo para parceiros Você Mais+.<br>Digite a senha recebida por e-mail para acessar.</div>
+    <div class="gate-desc">Benefício exclusivo para parceiros Você Mais+.<br>Digite a senha recebida para acessar.</div>
     <input type="password" class="gate-input" id="gate-input" placeholder="Senha de acesso" autocomplete="current-password" />
     <div class="gate-error" id="gate-error"></div>
     <button class="gate-btn" id="gate-btn">Acessar Portal →</button>
-    <div class="gate-badge">Você se tornou parceiro e não recebeu a senha? Entre em contato com seu representante Você Mais+.</div>
+    <div class="gate-badge">Não recebeu a senha? Fale com seu representante Você Mais+.</div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════
-     MODAL DE ANÁLISE
-════════════════════════════════════════════════════════ -->
+<!-- MODAL -->
 <div class="modal-overlay" id="modal">
   <div class="modal" role="dialog" aria-modal="true">
-    <div class="modal-header">
+    <div class="modal-hdr" id="modal-hdr">
       <button class="modal-close" id="modal-close-btn" aria-label="Fechar">&times;</button>
-      <div class="modal-tag"     id="m-tag"></div>
-      <div class="modal-headline" id="m-headline"></div>
-      <div class="modal-stars"   id="m-stars"></div>
+      <div id="hdr-product" style="display:none">
+        <div class="mp-line-badge" id="mp-line"></div>
+        <div class="mp-name" id="mp-name"></div>
+        <div class="mp-format" id="mp-format"></div>
+      </div>
+      <div id="hdr-news" style="display:none">
+        <div class="modal-tag" id="m-tag"></div>
+        <div class="modal-headline" id="m-headline"></div>
+        <div class="modal-stars" id="m-stars"></div>
+      </div>
     </div>
     <div class="modal-body">
-      <div class="modal-section">
-        <div class="modal-section-title">O que você precisa saber</div>
-        <div class="modal-text" id="m-summary"></div>
-        <div class="modal-source">
-          <span class="modal-source-label">Fonte</span>
-          <span class="modal-source-val" id="m-source"></span>
+      <div id="body-product" style="display:none">
+        <div class="modal-sec"><div class="modal-sec-title">O que é</div><div class="modal-text" id="mp-oque"></div></div>
+        <div class="modal-sec"><div class="modal-sec-title">Para quem é</div><ul class="modal-list" id="mp-paraquem"></ul></div>
+        <div class="modal-sec"><div class="modal-sec-title">Benefícios comprovados</div><ul class="modal-list" id="mp-beneficios"></ul></div>
+        <div class="modal-sec"><div class="modal-sec-title">Argumentos de venda</div><div id="mp-argumentos"></div></div>
+        <div class="modal-sec"><div class="modal-sec-title">Objeções e respostas</div><div id="mp-objecoes"></div></div>
+        <div class="modal-sec"><div class="modal-sec-title">Combina com</div><div class="modal-combina" id="mp-combina"></div></div>
+        <div class="modal-balcao"><div class="balcao-accent"></div><div class="balcao-lbl">Argumento para o Balcão</div><div class="balcao-text" id="mp-balcao"></div></div>
+      </div>
+      <div id="body-news" style="display:none">
+        <div class="modal-sec">
+          <div class="modal-sec-title">O que você precisa saber</div>
+          <div class="modal-text" id="m-summary"></div>
+          <div class="modal-source"><span class="modal-source-label">Fonte</span><span class="modal-source-val" id="m-source"></span></div>
         </div>
-      </div>
-      <div class="modal-section">
-        <div class="modal-section-title">Potencial de Venda</div>
-        <div class="modal-scores">
-          <div class="score-item">
-            <div class="score-num" id="m-curto"></div>
-            <div class="score-label">Procura<br>pelo cliente</div>
-          </div>
-          <div class="score-item">
-            <div class="score-num" id="m-medio"></div>
-            <div class="score-label">Facilidade<br>de argumentar</div>
-          </div>
-          <div class="score-item">
-            <div class="score-num" id="m-longo"></div>
-            <div class="score-label">Margem<br>potencial</div>
+        <div class="modal-sec">
+          <div class="modal-sec-title">Potencial de Venda</div>
+          <div class="modal-scores">
+            <div class="score-item"><div class="score-num" id="m-curto"></div><div class="score-label">Procura<br>pelo cliente</div></div>
+            <div class="score-item"><div class="score-num" id="m-medio"></div><div class="score-label">Facilidade<br>de argumentar</div></div>
+            <div class="score-item"><div class="score-num" id="m-longo"></div><div class="score-label">Margem<br>potencial</div></div>
           </div>
         </div>
-      </div>
-      <div class="modal-idea">
-        <div class="modal-idea-accent"></div>
-        <div class="modal-idea-label">Argumento para o Balcão</div>
-        <div class="modal-idea-text" id="m-idea"></div>
-      </div>
-      <div class="modal-fit">
-        <div class="modal-fit-title">Esse conteúdo foi útil para você?</div>
-        <div class="modal-fit-btns">
-          <button class="modal-fit-btn" onclick="selectFit(this)">
-            <span class="fit-emoji">👍</span>
-            <span class="fit-label">Muito útil</span>
-          </button>
-          <button class="modal-fit-btn" onclick="selectFit(this)">
-            <span class="fit-emoji">📝</span>
-            <span class="fit-label">Quero mais</span>
-          </button>
-          <button class="modal-fit-btn" onclick="selectFit(this)">
-            <span class="fit-emoji">👎</span>
-            <span class="fit-label">Não se aplica</span>
-          </button>
+        <div class="modal-idea"><div class="idea-accent"></div><div class="idea-lbl">Argumento para o Balcão</div><div class="idea-text" id="m-idea"></div></div>
+        <div class="modal-fit">
+          <div class="modal-fit-title">Esse conteúdo foi útil?</div>
+          <div class="modal-fit-btns">
+            <button class="modal-fit-btn" onclick="selectFit(this)"><span class="fit-emoji">👍</span><span class="fit-label">Muito útil</span></button>
+            <button class="modal-fit-btn" onclick="selectFit(this)"><span class="fit-emoji">📝</span><span class="fit-label">Quero mais</span></button>
+            <button class="modal-fit-btn" onclick="selectFit(this)"><span class="fit-emoji">👎</span><span class="fit-label">Não se aplica</span></button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════
-     HEADER
-════════════════════════════════════════════════════════ -->
+<!-- HEADER -->
 <header>
   <div class="header-inner">
     <a class="logo-wrap" href="#">
@@ -340,574 +344,435 @@
       <div class="logo-sub">Portal do Lojista Informado</div>
     </a>
     <nav>
-      <a href="#" class="active" data-filter="all">Hoje</a>
-      <a href="#" data-filter="produtos">Produtos</a>
-      <a href="#" data-filter="beneficios">Benefícios</a>
-      <a href="#" data-filter="como-vender">Como Vender</a>
+      <a data-view="catalog" class="active">Catálogo</a>
+      <a data-view="kits">Kits</a>
+      <a data-view="objectives">Por Objetivo</a>
+      <a data-view="today">Hoje</a>
     </nav>
     <div class="header-date" id="header-date"></div>
   </div>
 </header>
 
-<!-- ═══════════════════════════════════════════════════════
-     ALERTA
-════════════════════════════════════════════════════════ -->
+<!-- ALERT STRIP -->
 <div class="alert-strip">
-  <span class="alert-badge">💡 Dica de Venda</span>
-  <span class="alert-text"><strong>Creatina feminina</strong> é a busca que mais cresceu em 2026 — treine sua equipe para a abordagem certa e nunca perca essa venda por falta de argumento.</span>
+  <span class="alert-badge">Dica do dia</span>
+  <span class="alert-text"><strong>Pergunte antes de indicar:</strong> "O que você quer melhorar?" — quem é ouvido compra mais, volta mais e indica mais.</span>
 </div>
 
-<!-- Cross-edition view (filtro por categoria) -->
-<div id="cross-edition-view"></div>
-
-<!-- ═══════════════════════════════════════════════════════
-     MAIN CONTENT
-════════════════════════════════════════════════════════ -->
-<main id="main-content">
-  <div class="edition-bar">
-    <div class="edition-live">
-      <div class="live-dot"></div>
-      <span class="edition-label" id="edition-label">Edição de hoje</span>
+<!-- MAIN -->
+<main>
+  <!-- CATALOGO -->
+  <div id="catalog-view" class="view active">
+    <div class="catalog-top">
+      <input type="text" class="search-input" id="prod-search" placeholder="Buscar produto..." />
+      <div class="line-filters" id="line-filters">
+        <button class="lf-btn active" data-line="all">Todos</button>
+        <button class="lf-btn" data-line="saude">Saúde</button>
+        <button class="lf-btn" data-line="beleza">Beleza</button>
+        <button class="lf-btn" data-line="energia">Energia</button>
+        <button class="lf-btn" data-line="emagrec">Emagrecimento</button>
+        <button class="lf-btn" data-line="imunidade">Imunidade</button>
+        <button class="lf-btn" data-line="sono">Sono</button>
+      </div>
     </div>
-    <span class="edition-meta">13 análises para o lojista · Atualizado às 07h00</span>
+    <div class="product-grid" id="product-grid"></div>
   </div>
 
-  <!-- ── ROW 1 ── -->
-  <div class="grid">
-
-    <div class="card c-hero bg-navy" data-modal="1" data-category="beneficios">
-      <div>
-        <span class="accent-bar"></span>
-        <div class="tag"><div class="tag-dot"></div>Benefícios · Feminino</div>
-        <div class="headline">Creatina não é só pra academia: mulheres ganham foco, energia e disposição em 30 dias</div>
-        <p class="sub">9 em cada 10 usuárias relatam melhora cognitiva. Saiba como apresentar para quem nunca pensou em usar.</p>
-      </div>
-      <div class="card-foot"><span class="cta-label">Ver argumento de venda</span><div class="arrow-btn">→</div></div>
-      <span class="plus-deco" style="bottom:16px;">+</span>
-    </div>
-
-    <div class="card c-tall bg-black" data-modal="2" data-category="como-vender">
-      <div>
-        <span class="accent-bar"></span>
-        <div class="tag"><div class="tag-dot"></div>Como Vender</div>
-        <div class="headline">3 perguntas que fecham a venda de magnésio em menos de 2 minutos</div>
-        <p class="sub">"Tem dificuldade pra dormir? Fica ansioso? Acorda cansada?" — um "sim" já é seu cliente.</p>
-      </div>
-      <div class="card-foot"><span class="cta-label">Ver o roteiro completo</span><div class="arrow-btn">→</div></div>
-    </div>
-
-    <div class="card c-wide bg-gray100" data-modal="3" data-category="produtos">
-      <div>
-        <div class="tag"><div class="tag-dot"></div>Produtos · Qualidade</div>
-        <div class="headline">Por que o magnésio quelado não é o mesmo que o do concorrente — e como explicar em 30 segundos</div>
-        <p class="sub">Quelação é o que garante absorção real. Aprenda a demonstrar essa diferença para o cliente na hora.</p>
-      </div>
-      <div class="card-foot"><span class="cta-label">Ver o argumento</span><div class="arrow-btn">→</div></div>
-    </div>
-
-    <div class="card c-med bg-yellow" data-modal="4" data-category="produtos">
-      <div>
-        <span class="accent-bar"></span>
-        <div class="tag"><div class="tag-dot"></div>Produtos · Colágeno</div>
-        <div class="stat-num">40%</div>
-        <div class="stat-desc">mais absorção do colágeno Verisol vs. colágeno comum — a diferença que justifica o preço premium</div>
-      </div>
-      <div class="card-foot"><span class="cta-label">Como usar esse dado</span><div class="arrow-btn">→</div></div>
-    </div>
-
+  <!-- KITS -->
+  <div id="kits-view" class="view">
+    <div class="kits-grid" id="kits-grid"></div>
   </div>
 
-  <div class="section-hd">
-    <span class="section-hd-label">Argumentos prontos para o balcão — use agora</span>
-    <div class="section-hd-line"></div>
+  <!-- OBJETIVOS -->
+  <div id="objectives-view" class="view">
+    <div class="obj-pills" id="obj-pills"></div>
+    <div class="obj-result-label" id="obj-result-label">Selecione um objetivo acima para ver os produtos indicados</div>
+    <div class="product-grid" id="obj-grid"></div>
   </div>
 
-  <div class="grid">
-
-    <div class="card c-sm bg-gray800" data-modal="5" data-category="beneficios">
-      <div>
-        <div class="tag"><div class="tag-dot"></div>Benefícios · Sono</div>
-        <div class="headline">O que acontece com o sono do cliente nas primeiras 2 semanas de magnésio glicina</div>
-        <p class="sub">Dados clínicos prontos para você contar no balcão.</p>
-      </div>
-      <div class="card-foot"><span class="cta-label">Ver análise</span><div class="arrow-btn">→</div></div>
+  <!-- HOJE -->
+  <div id="today-view" class="view">
+    <div class="edition-bar">
+      <div class="edition-live"><div class="live-dot"></div><span class="edition-label" id="edition-label">Edição de hoje</span></div>
+      <span class="edition-meta">13 análises · atualizado às 7h</span>
     </div>
-
-    <div class="card c-sm bg-navy" data-modal="6" data-category="como-vender">
-      <div>
-        <span class="accent-bar"></span>
-        <div class="tag"><div class="tag-dot"></div>Como Vender · Objeções</div>
-        <div class="stat-num" style="font-size:clamp(28px,4vw,48px);">73%</div>
-        <div class="stat-desc">das clientes perguntam sobre efeitos colaterais — aprenda a resposta que transforma objeção em venda</div>
-      </div>
-      <div class="card-foot"><span class="cta-label">Ver a resposta</span><div class="arrow-btn">→</div></div>
-    </div>
-
-    <div class="card c-sm bg-white" data-modal="7" data-category="produtos">
-      <div>
-        <div class="tag"><div class="tag-dot"></div>Produtos · Vitaminas</div>
-        <div class="headline">Vitamina D3 + K2: a história dos ossos que faz o cliente entender por que pagar mais</div>
-        <p class="sub">Sem K2, o cálcio pode ir para os vasos. Aprenda a contar essa história.</p>
-      </div>
-      <div class="card-foot"><span class="cta-label">Ver argumento</span><div class="arrow-btn">→</div></div>
-    </div>
-
-    <div class="card c-wide bg-navy" data-modal="8" data-category="beneficios">
-      <div>
-        <span class="accent-bar"></span>
-        <div class="tag"><div class="tag-dot"></div>Benefícios · Feminino</div>
-        <div class="headline">Menopausa e suplementação: o roteiro que transforma uma conversa difícil em fidelização vitalícia</div>
-        <p class="sub">O trio magnésio + colágeno + D3/K2 que toda mulher nessa fase precisa — e poucos lojistas sabem indicar.</p>
-      </div>
-      <div class="card-foot"><span class="cta-label">Ver o roteiro completo</span><div class="arrow-btn">→</div></div>
-      <span class="plus-deco" style="bottom:12px;">+</span>
-    </div>
-
-    <div class="card c-med bg-yellow" data-modal="9" data-category="como-vender">
-      <div>
-        <span class="accent-bar"></span>
-        <div class="tag"><div class="tag-dot"></div>Como Vender</div>
-        <div class="stat-num">#1</div>
-        <div class="stat-desc">objeção de 2026 — "É natural de verdade ou tem química?" — responda com autoridade</div>
-      </div>
-      <div class="card-foot"><span class="cta-label">Ver a resposta</span><div class="arrow-btn">→</div></div>
-    </div>
-
-    <div class="card c-third bg-gray100" data-modal="10" data-category="como-vender">
-      <div>
-        <div class="tag"><div class="tag-dot"></div>Exposição · Loja</div>
-        <div class="stat-num">+38%</div>
-        <div class="stat-desc">de conversão organizando por objetivo do cliente em vez de por categoria</div>
-      </div>
-      <div class="card-foot"><span class="cta-label">Como fazer</span><div class="arrow-btn">→</div></div>
-    </div>
-
-    <div class="card c-third bg-white" data-modal="11" data-category="beneficios">
-      <div>
-        <div class="tag"><div class="tag-dot"></div>Benefícios · Energia</div>
-        <div class="headline">L-teanina + cafeína: energia limpa que o cliente não encontra em nenhum outro lugar</div>
-        <p class="sub">O diferencial que faz o cliente voltar.</p>
-      </div>
-      <div class="card-foot"><span class="cta-label">Ver análise</span><div class="arrow-btn">→</div></div>
-    </div>
-
-    <div class="card c-third bg-black" data-modal="12" data-category="produtos">
-      <div>
-        <span class="accent-bar"></span>
-        <div class="tag"><div class="tag-dot"></div>Produtos · Premium</div>
-        <div class="stat-num" style="font-size:clamp(20px,2.5vw,32px); letter-spacing:-.03em;">KSM-66</div>
-        <div class="stat-desc">a certificação da ashwagandha que vira argumento de venda em 15 segundos</div>
-      </div>
-      <div class="card-foot"><span class="cta-label">Como usar</span><div class="arrow-btn">→</div></div>
-    </div>
-
-  </div>
-
-  <div class="section-hd">
-    <span class="section-hd-label">Análise desta edição — o perfil do seu cliente em 2026</span>
-    <div class="section-hd-line"></div>
-  </div>
-
-  <div class="grid">
-    <div class="card c-full bg-navy" data-modal="13" data-category="como-vender">
-      <div>
-        <span class="accent-bar"></span>
-        <div class="tag"><div class="tag-dot"></div>Perfil do Consumidor</div>
-        <div class="headline">O cliente de suplementos de 2026: quem é, o que quer e como a Você Mais+ te coloca à frente de qualquer concorrente</div>
-      </div>
-      <div class="card-foot">
-        <span class="cta-label">Mulher · 30–50 anos · Pesquisa antes de chegar · Paga por conhecimento</span>
-        <div class="arrow-btn">→</div>
-      </div>
-      <span class="plus-deco" style="bottom:12px;font-size:72px;">+</span>
+    <div class="grid">
+      <div class="card c-hero bg-navy"    data-news="1"><div><div class="tag"><span class="tag-dot"></span>Benefícios · Feminino</div><div class="headline">Creatina não é só pra academia: mulheres ganham foco, energia e disposição em 30 dias</div></div><div class="card-foot"><span class="cta-label">Leia a análise</span><div class="arrow-btn">→</div></div></div>
+      <div class="card c-tall bg-black"   data-news="2"><div><div class="tag"><span class="tag-dot"></span>Como Vender · Magnésio</div><div class="headline">3 perguntas que fecham a venda de magnésio em menos de 2 minutos</div></div><div class="card-foot"><span class="cta-label">Leia a análise</span><div class="arrow-btn">→</div></div></div>
+      <div class="card c-wide bg-gray100" data-news="3"><div><div class="tag"><span class="tag-dot"></span>Produtos · Qualidade</div><div class="headline">Por que o magnésio quelado é diferente — e como explicar sem complicar</div></div><div class="card-foot"><span class="cta-label">Leia a análise</span><div class="arrow-btn">→</div></div></div>
+      <div class="card c-med bg-yellow"   data-news="4"><div><div class="tag"><span class="tag-dot"></span>Produtos · Colágeno</div><div class="headline">Colágeno Verisol vs. colágeno comum: a diferença de 40%</div></div><div class="card-foot"><span class="cta-label">Leia a análise</span><div class="arrow-btn">→</div></div></div>
+      <div class="card c-sm bg-gray800"   data-news="5"><div><div class="tag"><span class="tag-dot"></span>Benefícios · Sono</div><div class="headline">O que acontece nas primeiras 2 semanas de magnésio glicina</div></div><div class="card-foot"><span class="cta-label">Leia</span><div class="arrow-btn">→</div></div></div>
+      <div class="card c-sm bg-navy"      data-news="6"><div><div class="tag"><span class="tag-dot"></span>Como Vender · Objeções</div><div class="headline">73% perguntam sobre efeitos colaterais — a resposta que vira venda</div></div><div class="card-foot"><span class="cta-label">Leia</span><div class="arrow-btn">→</div></div></div>
+      <div class="card c-sm bg-white"     data-news="7"><div><div class="tag"><span class="tag-dot"></span>Produtos · Vitaminas</div><div class="headline">D3 + K2: a história que faz o cliente entender por que pagar mais</div></div><div class="card-foot"><span class="cta-label">Leia</span><div class="arrow-btn">→</div></div></div>
+      <div class="card c-wide bg-navy"    data-news="8"><div><div class="tag"><span class="tag-dot"></span>Benefícios · Menopausa</div><div class="headline">Menopausa e suplementação: o roteiro que fideliza a cliente pela vida toda</div></div><div class="card-foot"><span class="cta-label">Leia a análise</span><div class="arrow-btn">→</div></div></div>
+      <div class="card c-med bg-yellow"   data-news="9"><div><div class="tag"><span class="tag-dot"></span>Como Vender · Credibilidade</div><div class="headline">"É natural de verdade?" — responda com autoridade e feche a venda</div></div><div class="card-foot"><span class="cta-label">Leia a análise</span><div class="arrow-btn">→</div></div></div>
+      <div class="card c-third bg-gray100"data-news="10"><div><div class="tag"><span class="tag-dot"></span>Exposição · Conversão</div><div class="headline">+38% de conversão organizando por objetivo</div></div><div class="card-foot"><span class="cta-label">Leia</span><div class="arrow-btn">→</div></div></div>
+      <div class="card c-third bg-white"  data-news="11"><div><div class="tag"><span class="tag-dot"></span>Benefícios · Energia</div><div class="headline">L-teanina + cafeína: energia limpa sem crash</div></div><div class="card-foot"><span class="cta-label">Leia</span><div class="arrow-btn">→</div></div></div>
+      <div class="card c-third bg-black"  data-news="12"><div><div class="tag"><span class="tag-dot"></span>Produtos · Premium</div><div class="headline">KSM-66: a certificação que vira argumento em 15 segundos</div></div><div class="card-foot"><span class="cta-label">Leia</span><div class="arrow-btn">→</div></div></div>
+      <div class="card c-full bg-navy"    data-news="13"><div><div class="tag"><span class="tag-dot"></span>Perfil do Consumidor</div><div class="headline">O cliente de suplementos de 2026: quem é, o que quer e como a Você Mais+ te coloca à frente</div></div><div class="card-foot"><span class="cta-label">Leia a análise completa</span><div class="arrow-btn">→</div></div></div>
     </div>
   </div>
-
 </main>
 
-<!-- ═══════════════════════════════════════════════════════
-     EDIÇÕES ANTERIORES
-════════════════════════════════════════════════════════ -->
-<section class="archive">
+<!-- ARCHIVE -->
+<div class="archive">
   <div class="archive-inner">
-    <div class="archive-hd">
-      <span class="archive-title">Edições Anteriores</span>
-      <div class="archive-line"></div>
-    </div>
-    <div class="archive-grid" id="archive-grid">
+    <div class="archive-hd"><span class="archive-title">Edições Anteriores</span><div class="archive-line"></div></div>
+    <div class="archive-grid">
       <!-- ARCHIVE_ENTRIES_START -->
+      <span class="archive-empty">As edições anteriores aparecerão aqui após a primeira atualização automática.</span>
       <!-- ARCHIVE_ENTRIES_END -->
     </div>
-    <p class="archive-empty" id="archive-empty" style="display:none;">As próximas edições aparecerão aqui automaticamente após cada atualização.</p>
   </div>
-</section>
+</div>
 
-<!-- ═══════════════════════════════════════════════════════
-     FOOTER
-════════════════════════════════════════════════════════ -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <img src="logo-branca.png" alt="você-mais+" style="height:16px;opacity:.75;" />
+      <img src="logo-branca.png" alt="você-mais+" style="height:20px;opacity:.7;" />
       <div class="footer-sep"></div>
-      <span class="footer-tagline">Nutrição com clareza.</span>
+      <span class="footer-tagline">Nutrição com Clareza</span>
     </div>
-    <span class="footer-note">Atualizado automaticamente às 7h · Benefício exclusivo para lojistas parceiros Você Mais+</span>
+    <span class="footer-note">Benefício exclusivo para lojistas parceiros Você Mais+</span>
   </div>
 </footer>
 
-<!-- ═══════════════════════════════════════════════════════
-     SCRIPTS
-════════════════════════════════════════════════════════ -->
 <script>
-/* ── DADOS DOS MODAIS ─────────────────────────────────── */
-var MODALS = {
+
+/* ====================================================
+   PRODUTO: MAG-7
+   ==================================================== */
+var PRODUCTS = {
   1: {
-    tag:     "Benefícios · Feminino",
-    stars:   "⭐⭐⭐⭐⭐",
-    headline:"Creatina não é só pra academia: mulheres ganham foco, energia e disposição em 30 dias",
-    summary: "Estudos da Universidade de Saskatchewan (Canadá) e do Journal of the International Society of Sports Nutrition confirmam que mulheres que suplementam creatina reportam melhora cognitiva em 71% dos casos, além dos benefícios musculares tradicionais. A grande maioria das clientes ainda associa creatina exclusivamente a homens e musculação — o que cria uma oportunidade enorme para o lojista que sabe apresentar corretamente. A dose eficaz é de 3g a 5g por dia, sem fase de carga necessária para mulheres que buscam benefícios cognitivos e de disposição.",
-    source:  "Journal of the International Society of Sports Nutrition / Univ. Saskatchewan, 2025",
-    curto:   "9",
-    medio:   "9",
-    longo:   "8",
-    idea:    "Abordagem para clientes femininas: 'A creatina é o suplemento com mais pesquisas científicas do mundo — e para mulheres, o benefício vai muito além do músculo. Em 30 dias, a maioria das clientes relata mais foco, menos fadiga mental e energia mais estável. Quer experimentar?' Funciona especialmente bem com mulheres de 30 a 50 anos que nunca consideraram o produto."
-  },
-  2: {
-    tag:     "Como Vender · Magnésio",
-    stars:   "⭐⭐⭐⭐⭐",
-    headline:"3 perguntas que fecham a venda de magnésio em menos de 2 minutos",
-    summary: "Pesquisa do IBGE estima que mais de 70% dos brasileiros têm deficiência subclínica de magnésio — sem saber. Isso significa que a maioria dos clientes que entra na sua loja já é candidata ao produto, independentemente do motivo da visita. O segredo está em fazer as perguntas certas antes de apresentar o produto, criando reconhecimento da necessidade antes da solução. Quem reconhece o próprio problema compra sem resistência.",
-    source:  "IBGE Pesquisa de Orçamentos Familiares / Ministério da Saúde, 2024",
-    curto:   "10",
-    medio:   "10",
-    longo:   "8",
-    idea:    "Roteiro dos 3 passos: (1) 'Como está seu sono? Demora pra adormecer ou acorda cansado?' (2) 'Sente aquela ansiedade ou tensão que não passa?' (3) 'Tem câimbra, cansaço muscular ou dor de cabeça frequente?' — Uma resposta sim já justifica a indicação. Apresente o magnésio quelado como a forma mais absorvível, diferenciando do óxido que vende no mercado sem funcionar."
-  },
-  3: {
-    tag:     "Produtos · Qualidade",
-    stars:   "⭐⭐⭐⭐⭐",
-    headline:"Por que o magnésio quelado é diferente — e como explicar sem complicar",
-    summary: "O magnésio quelado (bisglicinato ou glicina) tem taxa de absorção até 4x maior que o óxido de magnésio, que é o tipo mais comum em farmácias genéricas. A quelação significa que o mineral está ligado a um aminoácido, facilitando a passagem pela parede intestinal sem causar efeito laxativo. Para o cliente, isso significa que ele vai sentir resultado — o que gera retorno e indicação espontânea. A diferença de preço se justifica e o cliente aceita quando entende.",
-    source:  "Nutrition Reviews / Journal of the American College of Nutrition, 2024",
-    curto:   "8",
-    medio:   "9",
-    longo:   "9",
-    idea:    "Script rápido: 'O magnésio barato da farmácia é óxido — passa pelo intestino sem ser absorvido. O nosso é bisglicinato: fica no sangue, age de verdade. É por isso que clientes que experimentam voltam.' Simples, sem termos técnicos demais, e cria diferenciação de preço natural. Mostre as embalagens lado a lado se possível."
-  },
-  4: {
-    tag:     "Produtos · Colágeno",
-    stars:   "⭐⭐⭐⭐",
-    headline:"Colágeno Verisol vs. colágeno comum: a diferença de 40% que justifica o preço premium",
-    summary: "O Verisol é uma marca registrada de colágeno com estudos clínicos próprios mostrando 40% mais eficácia na síntese de colágeno dérmico em comparação com colágeno bovino genérico. Foi desenvolvido especificamente para pele, unhas e cabelo — não para articulações. Os estudos da Universidade de Kiel (Alemanha) mostram redução visível de rugas em 4 semanas com apenas 2,5g por dia. Esse dado concreto é o que fecha a objeção de preço.",
-    source:  "Skin Pharmacology and Physiology / GELITA AG Clinical Studies, 2024",
-    curto:   "8",
-    medio:   "8",
-    longo:   "9",
-    idea:    "'Esse colágeno tem estudos clínicos próprios provando 40% a mais de resultado. O colágeno genérico não tem esse comprovado. Você quer gastar menos em algo sem evidência ou investir em algo que funciona mesmo?' A comparação de custo-benefício funciona muito bem para justificar o preço e eliminar a objeção antes que ela apareça."
-  },
-  5: {
-    tag:     "Benefícios · Sono",
-    stars:   "⭐⭐⭐⭐⭐",
-    headline:"O que acontece com o sono do cliente nas primeiras 2 semanas de magnésio glicina",
-    summary: "O magnésio glicina (bisglicinato) tem efeito relaxante duplo: o magnésio ativa receptores GABA (o neurotransmissor do relaxamento) e a glicina reduz a temperatura corporal — ambos os efeitos favoráveis ao início do sono. Estudos publicados no Journal of Research in Medical Sciences mostram redução de 17 minutos no tempo para adormecer e 35% de melhora na qualidade do sono profundo após 8 semanas de suplementação. Compartilhar esse número específico cria credibilidade imediata.",
-    source:  "Journal of Research in Medical Sciences / Sleep Medicine Reviews, 2024",
-    curto:   "9",
-    medio:   "9",
-    longo:   "8",
-    idea:    "'Tome 400mg 30 minutos antes de dormir. Nas primeiras 2 semanas, a maioria das pessoas relata que adormece mais rápido e acorda mais descansada. Se não sentir nada em 3 semanas, me fala.' Dar um prazo concreto e abrir o canal de retorno cria confiança, fideliza o cliente e aumenta muito a chance de indicação para amigos."
-  },
-  6: {
-    tag:     "Como Vender · Objeções",
-    stars:   "⭐⭐⭐⭐",
-    headline:"73% das clientes perguntam sobre efeitos colaterais — a resposta que transforma objeção em venda",
-    summary: "A principal barreira de compra de suplementos naturais no Brasil é o medo de efeitos colaterais, especialmente para novos clientes. Pesquisa da Opinion Box (2025) confirma que 73% dos consumidores de suplementos já tiveram dúvidas sobre segurança antes de comprar. O lojista que responde com segurança e conhecimento fecha mais do que o que simplesmente diz 'é natural, não tem problema'. A transparência sobre efeitos menores cria mais confiança do que a negação total.",
-    source:  "Opinion Box — Comportamento do Consumidor de Suplementos, Brasil 2025",
-    curto:   "8",
-    medio:   "9",
-    longo:   "7",
-    idea:    "'Os suplementos da Você Mais+ têm registro na ANVISA e laudos de pureza por lote. Em produtos de qualidade, efeitos colaterais são raros na dose certa. O magnésio em dose muito alta pode amolecer as fezes — se isso acontecer, reduza pela metade por uma semana.' Ser honesto sobre um efeito menor cria mais confiança do que dizer que não existe nada."
-  },
-  7: {
-    tag:     "Produtos · Vitaminas",
-    stars:   "⭐⭐⭐⭐",
-    headline:"Vitamina D3 + K2: a história dos ossos que faz o cliente entender por que pagar mais",
-    summary: "Vitamina D3 aumenta a absorção de cálcio no intestino, mas sem a vitamina K2, o cálcio pode se depositar nas artérias em vez de ir para os ossos — um fenômeno chamado calcificação vascular. A K2 (especialmente na forma MK-7) direciona o cálcio para o lugar certo. A combinação D3+K2 é o que a ciência atual recomenda para saúde óssea real, especialmente para mulheres acima de 40 anos. A história é simples e impactante — e o cliente paga mais por ela.",
-    source:  "Nutrients Journal / European Journal of Nutrition, 2024",
-    curto:   "8",
-    medio:   "9",
-    longo:   "8",
-    idea:    "'Vitamina D sozinha aumenta o cálcio no sangue, mas sem K2, esse cálcio pode ir para os lugares errados — artérias, por exemplo. A K2 é o GPS do cálcio: manda para os ossos e dentes. Por isso o nosso produto combina os dois — funciona muito melhor que a vitamina D isolada que você acha em qualquer lugar.' Essa história tem impacto científico e emocional ao mesmo tempo."
-  },
-  8: {
-    tag:     "Benefícios · Menopausa",
-    stars:   "⭐⭐⭐⭐⭐",
-    headline:"Menopausa e suplementação: o roteiro que fideliza a cliente pela vida toda",
-    summary: "Mulheres na perimenopausa e menopausa enfrentam queda de estrogênio que afeta sono, humor, densidade óssea, saúde cardiovascular e cognição. O trio magnésio quelado + colágeno + vitamina D3/K2 aborda diretamente os três principais impactos: sono e ansiedade (magnésio), integridade da pele e articulações (colágeno), e saúde óssea (D3/K2). Este público tem alta intenção de compra, poder aquisitivo e busca ativamente soluções. O lojista que sabe atender essa demanda conquista uma cliente vitalícia.",
-    source:  "Menopause Society / Journal of Women's Health, 2025",
-    curto:   "8",
-    medio:   "8",
-    longo:   "9",
-    idea:    "'Para mulheres na menopausa, o trio essencial é magnésio para o sono e ansiedade, colágeno para a pele e articulações, e vitamina D com K2 para os ossos. Muitas das minhas clientes nessa fase notam diferença já no primeiro mês. Quer começar pelo que incomoda mais?' Perguntar o que incomoda mais personaliza a abordagem e aumenta muito a conversão e a fidelização."
-  },
-  9: {
-    tag:     "Como Vender · Credibilidade",
-    stars:   "⭐⭐⭐⭐",
-    headline:"#1 objeção de 2026: 'É natural de verdade ou tem química?' — responda com autoridade",
-    summary: "Com o aumento de fake news sobre saúde nas redes sociais, os consumidores chegam às lojas com desconfiança crescente sobre o que é realmente natural. Pesquisa da Mintel (2025) aponta que 81% dos consumidores brasileiros dizem que 'natural' é fator de decisão de compra — mas 67% têm dificuldade de avaliar se um produto realmente é natural. O lojista que conhece a procedência e os laudos vira uma autoridade confiável e insubstituível para o cliente.",
-    source:  "Mintel Global — Natural Health Trends Brasil, 2025",
-    curto:   "9",
-    medio:   "10",
-    longo:   "7",
-    idea:    "'A Você Mais+ tem CNPJ, registro ANVISA e laudos de pureza de laboratórios de terceiros para cada lote. Os ingredientes são extratos padronizados — isso garante a concentração ativa em cada cápsula. Diferente de produto sem registro comprado pela internet.' Mostrar o registro da ANVISA no celular durante a conversa elimina a objeção completamente."
-  },
-  10: {
-    tag:     "Exposição · Conversão",
-    stars:   "⭐⭐⭐⭐",
-    headline:"+38% de conversão organizando os suplementos por objetivo do cliente",
-    summary: "Estudo da Nielsen (2024) com lojas de suplementos no Brasil mostrou que lojas que organizam produtos por objetivo do cliente — 'Para dormir melhor', 'Para mais energia', 'Para a saúde da mulher' — têm taxa de conversão 38% maior e ticket médio 22% mais alto do que lojas organizadas por categoria técnica. O cliente que não sabe o que quer consegue se identificar com um objetivo, e a venda acontece por autoidentificação.",
-    source:  "Nielsen Retail Intelligence — Suplementos Brasil, 2024",
-    curto:   "7",
-    medio:   "7",
-    longo:   "9",
-    idea:    "Reorganize sua gôndola com seções por objetivo: 'Sono e Ansiedade' (magnésio, L-teanina), 'Energia e Foco' (creatina, vitaminas B), 'Pele e Beleza' (colágeno, biotina), 'Saúde da Mulher' (magnésio quelado, vitamina D, ferro). Uma plaquinha por seção. O cliente se guia sozinho e pede ajuda só para decidir entre produtos — não para descobrir o que precisa."
-  },
-  11: {
-    tag:     "Benefícios · Energia",
-    stars:   "⭐⭐⭐⭐",
-    headline:"L-teanina + cafeína: energia limpa que o cliente não encontra em nenhum outro lugar",
-    summary: "A combinação de 200mg de L-teanina com 100mg de cafeína é um dos combos mais estudados em neurociência cognitiva. A teanina modula os efeitos da cafeína, eliminando a ansiedade e o crash típicos do café, mantendo foco e energia por mais tempo. A Universidade de Shizuoka (Japão) documentou melhora de 22% em tarefas de atenção sustentada com essa combinação. É exatamente o que um profissional de 35-50 anos que já não aguenta mais 5 cafés por dia está buscando.",
-    source:  "Nutritional Neuroscience / Univ. Shizuoka Lab, 2024",
-    curto:   "8",
-    medio:   "8",
-    longo:   "8",
-    idea:    "'Se você toma café para ter energia mas fica ansioso ou dorme mal depois, a L-teanina resolve esse problema. Ela é o que transforma a cafeína bruta em foco limpo — como um café premium que não te deixa agitado.' Analogia com café premium funciona muito bem para o público executivo e profissional liberal de 35-50 anos."
-  },
-  12: {
-    tag:     "Produtos · Premium",
-    stars:   "⭐⭐⭐⭐",
-    headline:"KSM-66: a certificação da ashwagandha que vira argumento de venda em 15 segundos",
-    summary: "KSM-66 é a marca registrada do extrato padronizado de ashwagandha com o maior número de estudos clínicos — mais de 25 ensaios controlados. O padrão garante 5% de withanolídeos, os compostos ativos responsáveis pela redução de cortisol, melhora do sono e benefícios cognitivos. Ashwagandha genérica pode ter entre 0,5% e 1% de withanolídeos — de 5 a 10 vezes menos potente. Para o lojista, isso é o que justifica cobrar o dobro e o cliente aceitar com naturalidade.",
-    source:  "Ixoreal Biomed / Journal of the American Nutraceutical Association, 2024",
-    curto:   "7",
-    medio:   "8",
-    longo:   "9",
-    idea:    "'Ashwagandha tem que ter o KSM-66 no rótulo — é o extrato certificado com 5% de ativos, testado em mais de 25 estudos. Sem isso, é extrato genérico sem garantia de resultado. O nosso tem. É por isso que funciona e os clientes voltam.' Mostrar o logo KSM-66 no rótulo durante a explicação fecha a venda imediatamente."
-  },
-  13: {
-    tag:     "Perfil do Consumidor",
-    stars:   "⭐⭐⭐⭐⭐",
-    headline:"O cliente de suplementos de 2026: quem é, o que quer e como a Você Mais+ te coloca à frente",
-    summary: "O consumidor de suplementos premium de 2026 é predominantemente mulher (58%), tem entre 30 e 50 anos, renda média-alta, e chega à loja já tendo pesquisado no Google ou visto indicação de um criador de conteúdo de nutrição. Ele quer confirmação, não descoberta. Busca autoridade, não empurro. Paga mais por quem demonstra conhecimento real do produto. Os lojistas que mais crescem são os que viram consultores — não vendedores. A Você Mais+ te entrega o conhecimento que transforma essa equação a seu favor.",
-    source:  "ABIAD + Opinion Box — Comportamento de Compra Suplementos Brasil 2025",
-    curto:   "10",
-    medio:   "9",
-    longo:   "8",
-    idea:    "Posicione-se como consultor: 'Antes de te indicar qualquer coisa, me conta o que você está buscando melhorar.' Essa pergunta abre uma conversa, não uma venda. O cliente que é ouvido compra mais, volta mais e indica mais. O conhecimento que você recebe neste portal é o que te separa de qualquer concorrente que só sabe o nome do produto."
+    id: 1,
+    name: "MAG-7",
+    line: "Saúde Corpo e Mente",
+    lineKey: "saude",
+    format: "60 ou 120 Cápsulas · 500 mg",
+    tagline: "7 formas de magnésio para cobertura total do organismo",
+    tags: ["Relaxamento muscular", "Melhora o sono", "Saúde óssea", "Saúde dos nervos", "Energia celular"],
+    oque: "O MAG-7 reúne sete formas distintas de magnésio — quelato, malato, citrato, taurato, óxido, treonato e ascorbato — para absorção ideal e ação abrangente. Enquanto suplementos comuns usam apenas o óxido (de baixa absorção), o MAG-7 cobre múltiplos sistemas: muscular, nervoso, cerebral e energético. Um dos complexos de magnésio mais completos disponíveis no mercado.",
+    paraQuem: [
+      "Clientes com câimbras ou tensão muscular frequente",
+      "Quem tem dificuldade para dormir ou sono leve",
+      "Praticantes de atividade física que buscam recuperação completa",
+      "Pessoas com sintomas de estresse ou ansiedade",
+      "Quem sente cansaço sem causa aparente"
+    ],
+    beneficios: [
+      "Relaxamento muscular — alivia câimbras e tensão",
+      "Melhora a qualidade e a profundidade do sono",
+      "Suporte ao sistema nervoso e equilíbrio emocional",
+      "Energia celular — participa diretamente da produção de ATP",
+      "Saúde óssea — cofator essencial para fixação do cálcio",
+      "7 formas = cobertura que nenhum magnésio simples oferece"
+    ],
+    argumentos: [
+      "\"O magnésio de farmácia usa uma forma só — o óxido — que o corpo quase não absorve. O MAG-7 usa 7 formas diferentes, cada uma agindo em um sistema. É como ter 7 produtos em um, na dose certa.\"",
+      "\"Mais de 70% dos brasileiros têm deficiência de magnésio sem saber. Se seu cliente acorda cansado, tem câimbra ou fica ansioso, o MAG-7 é o caminho mais completo para resolver.\""
+    ],
+    objecoes: [
+      { q: "\"É muito caro, tem magnésio mais barato.\"", r: "\"O barato usa óxido — passa pelo intestino quase inteiro sem ser absorvido. O MAG-7 usa 7 formas de alta absorção. Você paga pelo que vai funcionar de verdade.\"" },
+      { q: "\"Já tomo magnésio, não preciso trocar.\"", r: "\"Que forma é o seu? Se não tem treonato, taurato e quelato, está cobrindo só parte do organismo. O MAG-7 é o upgrade que completa o que falta.\"" }
+    ],
+    combinaCom: ["Maizzen", "Creatina em Pó", "TAZ"],
+    balcao: "\"Você sente câimbra, acorda cansado ou fica tenso? Pode ser deficiência de magnésio — e a maioria das pessoas tem isso sem saber. O MAG-7 é diferente porque usa 7 formas, cada uma agindo em um lugar diferente do corpo. É o magnésio completo.\""
   }
 };
 
-/* ── DATA DINÂMICA ────────────────────────────────────── */
-(function() {
-  var now   = new Date();
-  var days  = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
-  var shortM= ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-  var longM = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
-  var d = now.getDate(), m = now.getMonth(), y = now.getFullYear();
-  var dayName = days[now.getDay()];
-  var el;
-  el = document.getElementById('header-date');
-  if (el) el.textContent = dayName + ', ' + d + ' ' + shortM[m] + ' ' + y;
+/* Produtos em breve (sem ficha ainda) */
+var COMING_SOON = [
+  { id:2,  name:"Pinus Pinaster",            line:"Beleza, Cabelo e Pele",        lineKey:"beleza",    tagline:"Antioxidante natural para pele, circulação e longevidade" },
+  { id:3,  name:"A.D.E.K",                   line:"Saúde Corpo e Mente",          lineKey:"saude",     tagline:"Complexo das 4 vitaminas lipossolúveis em uma cápsula" },
+  { id:4,  name:"NAC (N-Acetilcisteína)",    line:"Imunidade e Anti-Inflamatório",lineKey:"imunidade", tagline:"Precursor da glutationa — o maior antioxidante natural do organismo" },
+  { id:5,  name:"Creatina em Pó",            line:"Energia e Performance",        lineKey:"energia",   tagline:"O suplemento com mais estudos científicos do mundo" },
+  { id:6,  name:"S.B.+ (Seca Barriga)",      line:"Emagrecedores",                lineKey:"emagrec",   tagline:"Blend 4 em 1: Café Verde + Laranja Moro + Feno Grego + Fibras" },
+  { id:7,  name:"Feno Grego",                line:"Emagrecedores",                lineKey:"emagrec",   tagline:"Controle de apetite, glicose e equilíbrio hormonal natural" },
+  { id:8,  name:"Cúrcuma",                   line:"Imunidade e Anti-Inflamatório",lineKey:"imunidade", tagline:"Curcumina concentrada — anti-inflamatório natural mais pesquisado" },
+  { id:9,  name:"TAZ",                       line:"Energia e Performance",        lineKey:"energia",   tagline:"Pré-treino 4 em 1: energia, foco, vasodilatação e resistência" },
+  { id:10, name:"Vitamina D3 + K2",          line:"Saúde Corpo e Mente",          lineKey:"saude",     tagline:"D3 para absorver o cálcio. K2 para colocar no lugar certo." },
+  { id:11, name:"Laranja Moro + blend",      line:"Emagrecedores",                lineKey:"emagrec",   tagline:"Gordura abdominal em 4 frentes" },
+  { id:12, name:"Vitamina B12",              line:"Saúde Corpo e Mente",          lineKey:"saude",     tagline:"Energia, sistema nervoso e vitalidade" },
+  { id:13, name:"Panto H.S.N",              line:"Beleza, Cabelo e Pele",        lineKey:"beleza",    tagline:"Cabelo, pele e unhas — de dentro para fora" },
+  { id:14, name:"Magnésio Treonato",         line:"Relaxamento e Sono",           lineKey:"sono",      tagline:"O único magnésio que age diretamente no cérebro" },
+  { id:15, name:"Imuni",                     line:"Imunidade e Anti-Inflamatório",lineKey:"imunidade", tagline:"Alho + Própolis + Vit. C + Cúrcuma — defesa completa" },
+  { id:16, name:"Colágeno + Completo",       line:"Beleza, Cabelo e Pele",        lineKey:"beleza",    tagline:"Col. I+II + Q10 + Hialurônico + Vit. C" },
+  { id:17, name:"Ômega 3 / Óleo de Peixe",  line:"Saúde Corpo e Mente",          lineKey:"saude",     tagline:"EPA+DHA — anti-inflamatório, coração e cérebro" },
+  { id:18, name:"Complexo B",               line:"Saúde Corpo e Mente",          lineKey:"saude",     tagline:"Energia real, sistema nervoso e metabolismo" },
+  { id:19, name:"Coenzima Q10",             line:"Saúde Corpo e Mente",          lineKey:"saude",     tagline:"Energia mitocondrial e longevidade celular" },
+  { id:20, name:"Artromais",                line:"Saúde Corpo e Mente",          lineKey:"saude",     tagline:"Col. II + Glucosamina + Condroitina — articulações" },
+  { id:21, name:"Maizzen",                  line:"Relaxamento e Sono",           lineKey:"sono",      tagline:"Mag. + Melatonina + Triptofano + B6 — sono completo" },
+  { id:22, name:"Triptofano",               line:"Relaxamento e Sono",           lineKey:"sono",      tagline:"Serotonina e melatonina — humor e sono" },
+  { id:23, name:"Cálcio MDK",               line:"Saúde Corpo e Mente",          lineKey:"saude",     tagline:"Cálcio + Magnésio + D + K — saúde óssea completa" },
+  { id:24, name:"Inositol",                 line:"Relaxamento e Sono",           lineKey:"sono",      tagline:"Equilíbrio hormonal, SOP e ansiedade" },
+  { id:25, name:"New Pausa",                line:"Relaxamento e Sono",           lineKey:"sono",      tagline:"Suporte específico para a menopausa" },
+  { id:26, name:"A-Z Polivitamínico",       line:"Saúde Corpo e Mente",          lineKey:"saude",     tagline:"Cobertura completa de vitaminas e minerais" }
+];
+
+/* ====================================================
+   KITS
+   ==================================================== */
+var KITS = [
+  { id:1,  name:"Kit Emagrecimento",       tagline:"Três frentes de um mesmo objetivo",          products:["S.B.+ (Seca Barriga)","Laranja Moro + blend","Feno Grego"],          desc:"O S.B.+ apoia o metabolismo, a Laranja Moro age na gordura abdominal e o Feno Grego controla o apetite e regula a glicose. Emagrecimento que respeita o corpo." },
+  { id:2,  name:"Kit Sono",                tagline:"O trio do descanso profundo",                products:["Magnésio Treonato","Maizzen","Triptofano"],                           desc:"Triptofano fabrica serotonina e melatonina; Magnésio Treonato alivia tensão e age no cérebro; Maizzen fecha o ciclo com melatonina e B6. Para quem acorda cansado ou não consegue desligar." },
+  { id:3,  name:"Kit Beleza",              tagline:"De dentro para fora",                        products:["Colágeno + Completo","Pinus Pinaster","Panto H.S.N"],                 desc:"O Colágeno + Completo repõe firmeza e elasticidade, o Pinus Pinaster protege contra o envelhecimento, e o Panto H.S.N fortalece cabelo e unhas." },
+  { id:4,  name:"Kit Foco e Energia",      tagline:"Energia que não abandona no meio do dia",    products:["TAZ","Creatina em Pó","Vitamina B12"],                               desc:"TAZ entrega energia e foco imediatos; Creatina sustenta a performance muscular e cerebral; B12 garante o metabolismo energético que sustenta tudo." },
+  { id:5,  name:"Kit Imunidade",           tagline:"A tríade da defesa",                         products:["Imuni","A.D.E.K","NAC (N-Acetilcisteína)"],                          desc:"Imuni combina alho, própolis, vitamina C e cúrcuma; A.D.E.K repõe as vitaminas lipossolúveis essenciais; NAC é precursor da glutationa, o maior antioxidante endógeno." },
+  { id:6,  name:"Kit Ossos e Articulações",tagline:"Estrutura que dura",                         products:["Artromais","Vitamina D3 + K2","Cálcio MDK"],                         desc:"Artromais protege as articulações com colágeno tipo II, glucosamina e condroitina; D3+K2 garante que o cálcio vá para os ossos; Cálcio MDK fecha o ciclo mineral." },
+  { id:7,  name:"Kit Hormonal Feminino",   tagline:"Equilíbrio em todas as fases da vida",       products:["Feno Grego","Inositol","New Pausa"],                                 desc:"Feno Grego regula metabolismo e libido; Inositol equilibra humor, hormônios e ansiedade; New Pausa foi formulado especificamente para o suporte na menopausa." },
+  { id:8,  name:"Kit Longevidade",         tagline:"Cuidado que se acumula com o tempo",         products:["NAC (N-Acetilcisteína)","Coenzima Q10","Ômega 3 / Óleo de Peixe"],  desc:"NAC protege as células do estresse oxidativo; Q10 é essencial para energia mitocondrial; Ômega 3 reduz inflamação sistêmica e protege o cérebro e o coração." },
+  { id:9,  name:"Kit Performance",         tagline:"Para quem treina com seriedade",              products:["Creatina em Pó","TAZ","MAG-7"],                                      desc:"Creatina aumenta força e recuperação; TAZ prepara para o esforço com energia e vasodilatação; MAG-7 sustenta a função muscular e a recuperação completa com 7 formas de magnésio." },
+  { id:10, name:"Kit Detox e Vitalidade",  tagline:"Limpeza e recarregamento",                   products:["NAC (N-Acetilcisteína)","Cúrcuma","Complexo B"],                    desc:"NAC apoia a detoxificação hepática; Cúrcuma combate a inflamação crônica; Complexo B recarrega o metabolismo energético e o sistema nervoso." }
+];
+
+/* ====================================================
+   NOTÍCIAS
+   ==================================================== */
+var MODALS = {
+  1:{tag:"Benefícios · Feminino",stars:"⭐⭐⭐⭐⭐",headline:"Creatina não é só pra academia: mulheres ganham foco, energia e disposição em 30 dias",summary:"Estudos da Universidade de Saskatchewan e do Journal of the International Society of Sports Nutrition confirmam que mulheres que suplementam creatina reportam melhora cognitiva em 71% dos casos, além dos benefícios musculares tradicionais. A grande maioria das clientes ainda associa creatina exclusivamente a homens e musculação — criando uma oportunidade enorme para o lojista que sabe apresentar corretamente.",source:"Journal of the International Society of Sports Nutrition / Univ. Saskatchewan, 2025",curto:"9",medio:"9",longo:"8",idea:"'A creatina é o suplemento com mais pesquisas científicas do mundo — e para mulheres, o benefício vai muito além do músculo. Em 30 dias, a maioria relata mais foco, menos fadiga mental e energia mais estável. Quer experimentar?'"},
+  2:{tag:"Como Vender · Magnésio",stars:"⭐⭐⭐⭐⭐",headline:"3 perguntas que fecham a venda de magnésio em menos de 2 minutos",summary:"Pesquisa do IBGE estima que mais de 70% dos brasileiros têm deficiência subclínica de magnésio sem saber. Isso significa que a maioria dos clientes que entra na loja já é candidata ao produto, independentemente do motivo da visita.",source:"IBGE Pesquisa de Orçamentos Familiares / Ministério da Saúde, 2024",curto:"10",medio:"10",longo:"8",idea:"Roteiro: (1) 'Como está seu sono?' (2) 'Sente ansiedade ou tensão?' (3) 'Tem câimbra ou cansaço muscular?' — Uma resposta 'sim' já justifica a indicação do magnésio quelado."},
+  3:{tag:"Produtos · Qualidade",stars:"⭐⭐⭐⭐⭐",headline:"Por que o magnésio quelado é diferente — e como explicar sem complicar",summary:"O magnésio quelado tem taxa de absorção até 4x maior que o óxido, o tipo mais comum em farmácias genéricas. Para o cliente, isso significa sentir resultado — o que gera retorno e indicação espontânea.",source:"Nutrition Reviews / Journal of the American College of Nutrition, 2024",curto:"8",medio:"9",longo:"9",idea:"'O magnésio barato da farmácia é óxido — passa pelo intestino sem ser absorvido. O nosso é quelado: fica no sangue, age de verdade.' Simples, sem termos técnicos, e cria diferenciação de preço natural."},
+  4:{tag:"Produtos · Colágeno",stars:"⭐⭐⭐⭐",headline:"Colágeno Verisol vs. colágeno comum: a diferença de 40% que justifica o preço premium",summary:"O Verisol tem estudos clínicos próprios mostrando 40% mais eficácia na síntese de colágeno dérmico vs. colágeno bovino genérico. Estudos da Universidade de Kiel mostram redução visível de rugas em 4 semanas com 2,5g por dia.",source:"Skin Pharmacology and Physiology / GELITA AG Clinical Studies, 2024",curto:"8",medio:"8",longo:"9",idea:"'Esse colágeno tem estudos clínicos próprios provando 40% a mais de resultado. Você quer gastar menos em algo sem evidência ou investir em algo que funciona mesmo?'"},
+  5:{tag:"Benefícios · Sono",stars:"⭐⭐⭐⭐⭐",headline:"O que acontece com o sono do cliente nas primeiras 2 semanas de magnésio glicina",summary:"O magnésio glicina tem efeito relaxante duplo: ativa receptores GABA e reduz a temperatura corporal. Estudos mostram redução de 17 minutos no tempo para adormecer e 35% de melhora no sono profundo.",source:"Journal of Research in Medical Sciences / Sleep Medicine Reviews, 2024",curto:"9",medio:"9",longo:"8",idea:"'Tome 400mg 30 minutos antes de dormir. Nas primeiras 2 semanas, a maioria relata que adormece mais rápido e acorda mais descansado. Se não sentir nada em 3 semanas, me fala.'"},
+  6:{tag:"Como Vender · Objeções",stars:"⭐⭐⭐⭐",headline:"73% das clientes perguntam sobre efeitos colaterais — a resposta que transforma objeção em venda",summary:"Pesquisa da Opinion Box (2025) confirma que 73% dos consumidores de suplementos tiveram dúvidas sobre segurança antes de comprar. O lojista que responde com conhecimento fecha mais do que o que diz simplesmente 'é natural'.",source:"Opinion Box — Comportamento do Consumidor de Suplementos, Brasil 2025",curto:"8",medio:"9",longo:"7",idea:"'Os suplementos da Você Mais+ têm registro ANVISA e laudos de pureza por lote. Em dose certa, efeitos colaterais são raros. Ser honesto sobre um possível efeito menor cria mais confiança do que prometer que é perfeito.'"},
+  7:{tag:"Produtos · Vitaminas",stars:"⭐⭐⭐⭐",headline:"Vitamina D3 + K2: a história dos ossos que faz o cliente entender por que pagar mais",summary:"Sem K2, a vitamina D3 pode fazer o cálcio se depositar nas artérias em vez dos ossos. A K2 (MK-7) é o GPS do cálcio — manda para o lugar certo. Essa história simples justifica o preço premium e gera venda.",source:"Nutrients Journal / European Journal of Nutrition, 2024",curto:"8",medio:"9",longo:"8",idea:"'Vitamina D sozinha aumenta o cálcio no sangue mas sem K2 pode ir para os lugares errados. A K2 é o GPS do cálcio: manda para os ossos e dentes. É por isso que combinamos os dois.'"},
+  8:{tag:"Benefícios · Menopausa",stars:"⭐⭐⭐⭐⭐",headline:"Menopausa e suplementação: o roteiro que fideliza a cliente pela vida toda",summary:"Mulheres na perimenopausa e menopausa enfrentam queda de estrogênio que afeta sono, humor, ossos e cognição. O trio magnésio + colágeno + D3/K2 aborda os três impactos principais. Alto poder aquisitivo e alta intenção de compra.",source:"Menopause Society / Journal of Women's Health, 2025",curto:"8",medio:"8",longo:"9",idea:"'Para mulheres na menopausa, o trio essencial é magnésio para o sono, colágeno para a pele e articulações, e vitamina D com K2 para os ossos. Quer começar pelo que incomoda mais?'"},
+  9:{tag:"Como Vender · Credibilidade",stars:"⭐⭐⭐⭐",headline:"#1 objeção de 2026: 'É natural de verdade?' — responda com autoridade",summary:"81% dos consumidores dizem que 'natural' é fator de decisão — mas 67% têm dificuldade de avaliar. O lojista com conhecimento e laudos vira uma autoridade insubstituível.",source:"Mintel Global — Natural Health Trends Brasil, 2025",curto:"9",medio:"10",longo:"7",idea:"'A Você Mais+ tem CNPJ, registro ANVISA e laudos de pureza de terceiros por lote. Os ingredientes são extratos padronizados — concentração ativa garantida.'"},
+  10:{tag:"Exposição · Conversão",stars:"⭐⭐⭐⭐",headline:"+38% de conversão organizando os suplementos por objetivo do cliente",summary:"Lojas que organizam por objetivo ('Para dormir melhor', 'Para mais energia') têm 38% mais conversão e 22% mais ticket médio do que lojas por categoria técnica.",source:"Nielsen Retail Intelligence — Suplementos Brasil, 2024",curto:"7",medio:"7",longo:"9",idea:"Reorganize com seções: 'Sono e Ansiedade', 'Energia e Foco', 'Pele e Beleza', 'Saúde da Mulher'. Uma plaquinha por seção já transforma os resultados."},
+  11:{tag:"Benefícios · Energia",stars:"⭐⭐⭐⭐",headline:"L-teanina + cafeína: energia limpa que o cliente não encontra em nenhum outro lugar",summary:"A combinação de 200mg de L-teanina com 100mg de cafeína elimina a ansiedade e o crash típicos do café. Melhora de 22% em atenção sustentada documentada pela Universidade de Shizuoka.",source:"Nutritional Neuroscience / Univ. Shizuoka Lab, 2024",curto:"8",medio:"8",longo:"8",idea:"'Se você toma café mas fica ansioso ou dorme mal, a L-teanina resolve. Ela transforma a cafeína bruta em foco limpo — como um café premium que não te deixa agitado.'"},
+  12:{tag:"Produtos · Premium",stars:"⭐⭐⭐⭐",headline:"KSM-66: a certificação da ashwagandha que vira argumento de venda em 15 segundos",summary:"KSM-66 garante 5% de withanolídeos, os ativos responsáveis pela redução de cortisol e melhora do sono. Ashwagandha genérica pode ter 5 a 10x menos ativos.",source:"Ixoreal Biomed / Journal of the American Nutraceutical Association, 2024",curto:"7",medio:"8",longo:"9",idea:"'Ashwagandha tem que ter o KSM-66 no rótulo — é o extrato certificado testado em mais de 25 estudos. Sem isso, é genérico sem garantia.'"},
+  13:{tag:"Perfil do Consumidor",stars:"⭐⭐⭐⭐⭐",headline:"O cliente de suplementos de 2026: quem é, o que quer e como a Você Mais+ te coloca à frente",summary:"Predominantemente mulher (58%), 30-50 anos, renda média-alta, que chega à loja já tendo pesquisado. Quer confirmação, não descoberta. Paga mais por quem demonstra conhecimento real. Os lojistas que crescem viram consultores — não vendedores.",source:"ABIAD + Opinion Box — Comportamento de Compra Suplementos Brasil 2025",curto:"10",medio:"9",longo:"8",idea:"Posicione-se como consultor: 'Antes de te indicar qualquer coisa, me conta o que você está buscando melhorar.' O cliente que é ouvido compra mais, volta mais e indica mais."}
+};
+
+/* ====================================================
+   INICIALIZAÇÃO
+   ==================================================== */
+(function(){
+  var now=new Date();
+  var days=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+  var sm=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+  var lm=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+  var d=now.getDate(), m=now.getMonth(), y=now.getFullYear();
+  var el = document.getElementById('header-date');
+  if(el) el.textContent = days[now.getDay()] + ', ' + d + ' ' + sm[m] + ' ' + y;
   el = document.getElementById('edition-label');
-  if (el) el.textContent = 'Edição de hoje — ' + d + ' de ' + longM[m] + ' de ' + y;
+  if(el) el.textContent = 'Edição de hoje — ' + d + ' de ' + lm[m] + ' de ' + y;
 })();
 
-/* ── PORTÃO DE SENHA ──────────────────────────────────── */
-(function() {
-  var PASS = 'vocemais_informado';
-  var KEY  = 'vm_lojista_ok';
-  var gate  = document.getElementById('gate');
-  var input = document.getElementById('gate-input');
-  var btn   = document.getElementById('gate-btn');
-  var err   = document.getElementById('gate-error');
-
-  try {
-    if (localStorage.getItem(KEY) === '1') {
-      gate.style.display = 'none';
-      return;
-    }
-  } catch(e) {}
-
-  gate.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-
-  function tryLogin() {
-    if (input.value === PASS) {
-      try { localStorage.setItem(KEY, '1'); } catch(e) {}
-      gate.style.opacity = '0';
-      setTimeout(function() {
-        gate.style.display = 'none';
-        document.body.style.overflow = '';
-      }, 350);
+/* GATE */
+(function(){
+  var PASS='vocemais_informado', KEY='vm_lojista_ok';
+  var gate=document.getElementById('gate');
+  var input=document.getElementById('gate-input');
+  var btn=document.getElementById('gate-btn');
+  var err=document.getElementById('gate-error');
+  try{ if(localStorage.getItem(KEY)==='1'){ gate.style.display='none'; return; } }catch(e){}
+  gate.style.display='flex'; document.body.style.overflow='hidden';
+  function tryLogin(){
+    if(input.value===PASS){
+      try{ localStorage.setItem(KEY,'1'); }catch(e){}
+      gate.style.opacity='0';
+      setTimeout(function(){ gate.style.display='none'; document.body.style.overflow=''; },350);
     } else {
-      err.textContent = 'Senha incorreta. Verifique e tente novamente.';
-      input.classList.add('error');
-      input.value = '';
-      input.focus();
-      setTimeout(function() { input.classList.remove('error'); }, 1500);
+      err.textContent='Senha incorreta. Verifique e tente novamente.';
+      input.classList.add('error'); input.value=''; input.focus();
+      setTimeout(function(){ input.classList.remove('error'); },1500);
     }
   }
-
-  btn.addEventListener('click', tryLogin);
-  input.addEventListener('keydown', function(e) { if (e.key === 'Enter') tryLogin(); });
+  btn.addEventListener('click',tryLogin);
+  input.addEventListener('keydown',function(e){ if(e.key==='Enter') tryLogin(); });
 })();
 
-/* ── SISTEMA DE MODAIS ────────────────────────────────── */
-document.addEventListener('DOMContentLoaded', function() {
-
-  function openModal(d) {
-    document.getElementById('m-tag').textContent      = d.tag;
-    document.getElementById('m-headline').textContent = d.headline;
-    document.getElementById('m-stars').textContent    = d.stars;
-    document.getElementById('m-summary').textContent  = d.summary;
-    document.getElementById('m-source').textContent   = d.source;
-    document.getElementById('m-curto').textContent    = d.curto + '/10';
-    document.getElementById('m-medio').textContent    = d.medio + '/10';
-    document.getElementById('m-longo').textContent    = d.longo + '/10';
-    document.getElementById('m-idea').textContent     = d.idea;
-    document.getElementById('modal').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeModal() {
-    document.getElementById('modal').classList.remove('open');
-    document.body.style.overflow = '';
-    document.querySelectorAll('.modal-fit-btn').forEach(function(b) { b.classList.remove('selected'); });
-  }
-
-  document.querySelectorAll('[data-modal]').forEach(function(card) {
-    card.addEventListener('click', function() {
-      var id = this.getAttribute('data-modal');
-      var d  = MODALS[id];
-      if (d) openModal(d);
-    });
+/* MODAL */
+function closeModal(){
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow='';
+  document.querySelectorAll('.modal-fit-btn').forEach(function(b){ b.classList.remove('selected'); });
+}
+function openProductModal(id){
+  var p=PRODUCTS[id]; if(!p) return;
+  document.getElementById('hdr-product').style.display='';
+  document.getElementById('hdr-news').style.display='none';
+  document.getElementById('body-product').style.display='';
+  document.getElementById('body-news').style.display='none';
+  document.getElementById('mp-line').textContent = p.line;
+  document.getElementById('mp-name').textContent = p.name;
+  document.getElementById('mp-format').textContent = p.format;
+  document.getElementById('mp-oque').textContent = p.oque;
+  var pq=document.getElementById('mp-paraquem'); pq.innerHTML='';
+  p.paraQuem.forEach(function(t){ var li=document.createElement('li'); li.textContent=t; pq.appendChild(li); });
+  var bn=document.getElementById('mp-beneficios'); bn.innerHTML='';
+  p.beneficios.forEach(function(t){ var li=document.createElement('li'); li.textContent=t; bn.appendChild(li); });
+  var ag=document.getElementById('mp-argumentos'); ag.innerHTML='';
+  p.argumentos.forEach(function(t){ var d=document.createElement('div'); d.className='modal-script'; d.textContent=t; ag.appendChild(d); });
+  var ob=document.getElementById('mp-objecoes'); ob.innerHTML='';
+  p.objecoes.forEach(function(o){
+    var d=document.createElement('div'); d.className='modal-qa';
+    d.innerHTML='<div class="modal-qa-q">'+o.q+'</div><div class="modal-qa-r">'+o.r+'</div>';
+    ob.appendChild(d);
   });
+  var cm=document.getElementById('mp-combina'); cm.innerHTML='';
+  p.combinaCom.forEach(function(c){ var s=document.createElement('span'); s.className='combina-badge'; s.textContent=c; cm.appendChild(s); });
+  document.getElementById('mp-balcao').textContent = p.balcao;
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function openNewsModal(d){
+  document.getElementById('hdr-product').style.display='none';
+  document.getElementById('hdr-news').style.display='';
+  document.getElementById('body-product').style.display='none';
+  document.getElementById('body-news').style.display='';
+  document.getElementById('m-tag').textContent=d.tag;
+  document.getElementById('m-headline').textContent=d.headline;
+  document.getElementById('m-stars').textContent=d.stars;
+  document.getElementById('m-summary').textContent=d.summary;
+  document.getElementById('m-source').textContent=d.source;
+  document.getElementById('m-curto').textContent=d.curto+'/10';
+  document.getElementById('m-medio').textContent=d.medio+'/10';
+  document.getElementById('m-longo').textContent=d.longo+'/10';
+  document.getElementById('m-idea').textContent=d.idea;
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+window.openCrossModal=function(c){ openNewsModal(c); };
+window.selectFit=function(btn){
+  document.querySelectorAll('.modal-fit-btn').forEach(function(b){ b.classList.remove('selected'); });
+  btn.classList.add('selected');
+};
+document.getElementById('modal-close-btn').addEventListener('click',closeModal);
+document.getElementById('modal').addEventListener('click',function(e){ if(e.target===this) closeModal(); });
+document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeModal(); });
 
-  document.getElementById('modal').addEventListener('click', function(e) {
-    if (e.target === this) closeModal();
+/* NEWS CARDS */
+document.querySelectorAll('[data-news]').forEach(function(card){
+  card.addEventListener('click',function(){
+    var d=MODALS[this.getAttribute('data-news')];
+    if(d) openNewsModal(d);
   });
-  document.getElementById('modal-close-btn').addEventListener('click', closeModal);
-  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+});
 
-  // Botões de fit
-  window.selectFit = function(btn) {
-    document.querySelectorAll('.modal-fit-btn').forEach(function(b) { b.classList.remove('selected'); });
-    btn.classList.add('selected');
-  };
+/* CATÁLOGO — renderiza produto(s) + em breve */
+(function(){
+  var grid=document.getElementById('product-grid');
+  Object.keys(PRODUCTS).forEach(function(id){
+    var p=PRODUCTS[id];
+    var card=document.createElement('div');
+    card.className='prod-card';
+    card.innerHTML=
+      '<div class="prod-line-bar bg-'+p.lineKey+'"></div>'+
+      '<span class="prod-num">#'+p.id+'</span>'+
+      '<div class="prod-line-badge bg-'+p.lineKey+'">'+p.line+'</div>'+
+      '<div class="prod-name">'+p.name+'</div>'+
+      '<div class="prod-tagline">'+p.tagline+'</div>'+
+      '<div class="prod-tags">'+p.tags.map(function(t){ return '<span class="prod-tag">'+t+'</span>'; }).join('')+'</div>'+
+      '<div class="prod-cta"><span class="prod-cta-label">Ver ficha completa</span><div class="prod-arrow">→</div></div>';
+    card.addEventListener('click',function(){ openProductModal(parseInt(id)); });
+    grid.appendChild(card);
+  });
+  COMING_SOON.forEach(function(p){
+    var card=document.createElement('div');
+    card.className='prod-card coming-soon';
+    card.innerHTML=
+      '<div class="prod-line-bar bg-'+p.lineKey+'"></div>'+
+      '<span class="prod-num">#'+p.id+'</span>'+
+      '<div class="prod-line-badge bg-'+p.lineKey+'">'+p.line+'</div>'+
+      '<div class="prod-name">'+p.name+'</div>'+
+      '<div class="prod-tagline">'+p.tagline+'</div>'+
+      '<div class="prod-cta"><span class="coming-badge">Em breve</span></div>';
+    grid.appendChild(card);
+  });
+})();
 
-  // Abre modal a partir da view cross-edition
-  window.openCrossModal = function(c) { openModal(c); };
+/* KITS */
+(function(){
+  var grid=document.getElementById('kits-grid');
+  KITS.forEach(function(kit){
+    var card=document.createElement('div'); card.className='kit-card';
+    card.innerHTML=
+      '<div class="kit-num">Kit '+kit.id+' de '+KITS.length+'</div>'+
+      '<div class="kit-name">'+kit.name+'</div>'+
+      '<div class="kit-tagline">'+kit.tagline+'</div>'+
+      '<div class="kit-products">'+kit.products.map(function(p){ return '<span class="kit-prod-badge">'+p+'</span>'; }).join('')+'</div>'+
+      '<div class="kit-desc">'+kit.desc+'</div>';
+    grid.appendChild(card);
+  });
+})();
 
-/* ── FILTRO DO MENU (cross-edition) ───────────────────── */
-  var crossView   = document.getElementById('cross-edition-view');
-  var mainContent = document.getElementById('main-content');
-
-  document.querySelectorAll('nav a[data-filter]').forEach(function(link) {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      var filter = this.getAttribute('data-filter');
-      document.querySelectorAll('nav a').forEach(function(a) { a.classList.remove('active'); });
-      this.classList.add('active');
-
-      if (filter === 'all') {
-        mainContent.style.display = '';
-        crossView.style.display = 'none';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        return;
-      }
-
-      fetch('data.json?v=' + Date.now())
-        .then(function(r) { return r.json(); })
-        .then(function(data) {
-          var results = [];
-          data.editions.forEach(function(edition) {
-            edition.cards.forEach(function(card) {
-              if (card.category === filter) {
-                results.push({ card: card, date: edition.date, dateLabel: edition.dateLabel });
-              }
-            });
-          });
-          results.sort(function(a, b) { return b.date.localeCompare(a.date); });
-
-          var label = link.textContent;
-          var html  = '<div style="max-width:1280px;margin:0 auto;padding:48px 40px 80px;">';
-          html += '<div class="edition-bar"><div class="edition-live"><div class="live-dot"></div><span class="edition-label">Filtro: ' + label + '</span></div><span class="edition-meta">' + results.length + ' resultado' + (results.length !== 1 ? 's' : '') + ' · todas as edições</span></div>';
-
-          if (results.length === 0) {
-            html += '<p style="color:var(--gray-400);font-size:14px;margin-top:32px;">Nenhum resultado encontrado para esta categoria.</p>';
-          } else {
-            results.forEach(function(item) {
-              var c = item.card;
-              var cd = JSON.stringify(c).replace(/\\/g,'\\\\').replace(/'/g,"\\'");
-              html += '<div style="display:flex;gap:20px;padding:24px 0;border-bottom:1px solid var(--border);cursor:pointer;" onclick="openCrossModal(' + cd.replace(/"/g,"'") + ')">';
-              html += '<div style="min-width:110px;text-align:right;padding-top:4px;"><span style="font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:var(--navy);padding:3px 8px;border-radius:4px;">' + item.dateLabel + '</span></div>';
-              html += '<div style="flex:1;">';
-              html += '<div style="font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gray-400);margin-bottom:6px;">' + c.tag + ' · ' + c.stars + '</div>';
-              html += '<div style="font-size:18px;font-weight:800;line-height:1.2;letter-spacing:-.02em;color:var(--black);margin-bottom:8px;">' + c.headline + '</div>';
-              html += '<div style="font-size:13px;line-height:1.6;color:var(--gray-600);">' + c.summary + '</div>';
-              html += '</div>';
-              html += '<div style="align-self:center;width:34px;height:34px;border-radius:50%;background:var(--navy);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">→</div>';
-              html += '</div>';
-            });
+/* OBJETIVOS */
+var OBJECTIVES = [
+  {key:"sono",          emoji:"🌙", label:"Sono",                ids:[1,14,21,22,24,25]},
+  {key:"energia",       emoji:"⚡", label:"Energia",             ids:[1,3,5,9,12,18,26]},
+  {key:"performance",   emoji:"💪", label:"Performance",         ids:[5,9,1]},
+  {key:"beleza",        emoji:"✨", label:"Beleza",              ids:[2,13,16]},
+  {key:"imunidade",     emoji:"🛡️", label:"Imunidade",           ids:[3,4,8,10,15,17]},
+  {key:"emagrecimento", emoji:"⚖️", label:"Emagrecimento",      ids:[6,7,11]},
+  {key:"ossos",         emoji:"🦴", label:"Ossos e Articulações",ids:[10,20,23]},
+  {key:"feminino",      emoji:"🌸", label:"Saúde Feminina",      ids:[7,16,24,25]},
+  {key:"foco",          emoji:"🧠", label:"Foco e Cognição",     ids:[5,9,12,14,17]},
+  {key:"longevidade",   emoji:"⏳", label:"Longevidade",         ids:[4,8,17,19]}
+];
+(function(){
+  var pillsEl=document.getElementById('obj-pills');
+  var lbl=document.getElementById('obj-result-label');
+  var objGrid=document.getElementById('obj-grid');
+  OBJECTIVES.forEach(function(obj){
+    var pill=document.createElement('button'); pill.className='obj-pill';
+    pill.innerHTML='<span class="obj-pill-emoji">'+obj.emoji+'</span><span class="obj-pill-label">'+obj.label+'</span>';
+    pill.addEventListener('click',function(){
+      document.querySelectorAll('.obj-pill').forEach(function(p){ p.classList.remove('active'); });
+      pill.classList.add('active');
+      objGrid.innerHTML='';
+      var found=0;
+      obj.ids.forEach(function(id){
+        var p=PRODUCTS[id];
+        if(p){
+          found++;
+          var card=document.createElement('div'); card.className='prod-card';
+          card.innerHTML=
+            '<div class="prod-line-bar bg-'+p.lineKey+'"></div>'+
+            '<span class="prod-num">#'+p.id+'</span>'+
+            '<div class="prod-line-badge bg-'+p.lineKey+'">'+p.line+'</div>'+
+            '<div class="prod-name">'+p.name+'</div>'+
+            '<div class="prod-tagline">'+p.tagline+'</div>'+
+            '<div class="prod-tags">'+p.tags.slice(0,4).map(function(t){ return '<span class="prod-tag">'+t+'</span>'; }).join('')+'</div>'+
+            '<div class="prod-cta"><span class="prod-cta-label">Ver ficha completa</span><div class="prod-arrow">→</div></div>';
+          card.addEventListener('click',function(){ openProductModal(id); });
+          objGrid.appendChild(card);
+        } else {
+          var cs=COMING_SOON.find(function(x){ return x.id===id; });
+          if(cs){
+            var card=document.createElement('div'); card.className='prod-card coming-soon';
+            card.innerHTML=
+              '<div class="prod-line-bar bg-'+cs.lineKey+'"></div>'+
+              '<span class="prod-num">#'+cs.id+'</span>'+
+              '<div class="prod-line-badge bg-'+cs.lineKey+'">'+cs.line+'</div>'+
+              '<div class="prod-name">'+cs.name+'</div>'+
+              '<div class="prod-tagline">'+cs.tagline+'</div>'+
+              '<div class="prod-cta"><span class="coming-badge">Em breve</span></div>';
+            objGrid.appendChild(card);
           }
-          html += '</div>';
-          crossView.innerHTML = html;
-          mainContent.style.display = 'none';
-          crossView.style.display = '';
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        })
-        .catch(function() {
-          // data.json ainda não existe — mostra os cards da edição atual filtrados
-          var results = [];
-          document.querySelectorAll('[data-modal][data-category="' + filter + '"]').forEach(function(card) {
-            var id = card.getAttribute('data-modal');
-            var d  = MODALS[id];
-            if (d) results.push({ card: Object.assign({}, d, { category: filter }) });
-          });
-          var label = link.textContent;
-          var html  = '<div style="max-width:1280px;margin:0 auto;padding:48px 40px 80px;">';
-          html += '<div class="edition-bar"><div class="edition-live"><div class="live-dot"></div><span class="edition-label">Filtro: ' + label + '</span></div><span class="edition-meta">' + results.length + ' resultado' + (results.length !== 1 ? 's' : '') + ' · edição de hoje</span></div>';
-          results.forEach(function(item) {
-            var c   = item.card;
-            var safe = JSON.stringify(c);
-            html += '<div style="display:flex;gap:20px;padding:24px 0;border-bottom:1px solid var(--border);cursor:pointer;" onclick=\'openCrossModal(' + safe.replace(/\'/g,"\\'") + ')\'>';
-            html += '<div style="flex:1;">';
-            html += '<div style="font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gray-400);margin-bottom:6px;">' + c.tag + ' · ' + c.stars + '</div>';
-            html += '<div style="font-size:18px;font-weight:800;line-height:1.2;letter-spacing:-.02em;color:var(--black);margin-bottom:8px;">' + c.headline + '</div>';
-            html += '<div style="font-size:13px;line-height:1.6;color:var(--gray-600);">' + c.summary + '</div>';
-            html += '</div>';
-            html += '<div style="align-self:center;width:34px;height:34px;border-radius:50%;background:var(--navy);color:var(--white);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">→</div>';
-            html += '</div>';
-          });
-          html += '</div>';
-          crossView.innerHTML = html;
-          mainContent.style.display = 'none';
-          crossView.style.display = '';
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+        }
+      });
+      lbl.textContent = obj.ids.length + ' produto' + (obj.ids.length !== 1 ? 's' : '') + ' para "' + obj.label + '"' + (found < obj.ids.length ? ' (' + (obj.ids.length - found) + ' em breve)' : '');
     });
+    pillsEl.appendChild(pill);
   });
+})();
 
-  /* ── ARCHIVE: mostra aviso se vazio ─────────────────── */
-  var archiveGrid  = document.getElementById('archive-grid');
-  var archiveEmpty = document.getElementById('archive-empty');
-  if (archiveGrid && archiveEmpty) {
-    var hasEntries = archiveGrid.querySelector('.archive-card');
-    if (!hasEntries) archiveEmpty.style.display = 'block';
-  }
-
+/* TABS */
+document.querySelectorAll('nav a[data-view]').forEach(function(link){
+  link.addEventListener('click',function(e){
+    e.preventDefault();
+    var view=this.getAttribute('data-view');
+    document.querySelectorAll('nav a').forEach(function(a){ a.classList.remove('active'); });
+    this.classList.add('active');
+    document.querySelectorAll('.view').forEach(function(v){ v.classList.remove('active'); });
+    var target=document.getElementById(view+'-view');
+    if(target) target.classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
 });
 </script>
-
 </body>
 </html>
