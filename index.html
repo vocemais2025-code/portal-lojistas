@@ -86,6 +86,9 @@
 
     /* PRODUCT CARD */
     .prod-card { border-radius:14px; padding:22px; border:1px solid var(--border); background:var(--white); cursor:pointer; transition:all .18s; display:flex; flex-direction:column; position:relative; }
+    .prod-img-wrap { margin:-22px -22px 14px -22px; border-radius:13px 13px 0 0; overflow:hidden; height:180px; background:var(--gray-50); }
+    .prod-img-wrap img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .3s; }
+    .prod-card:hover .prod-img-wrap img { transform:scale(1.04); }
     .prod-card:hover { transform:translateY(-3px); box-shadow:0 10px 30px rgba(0,0,0,.09); border-color:transparent; }
     .prod-card.coming-soon { opacity:.5; cursor:default; pointer-events:none; }
     .prod-line-bar { height:3px; border-radius:2px; margin-bottom:14px; }
@@ -1151,6 +1154,7 @@ var PRODUCTS = {
     line: "Relaxamento e Sono",
     lineKey: "sono",
     format: "60 Cápsulas · 500 mg",
+    img: "imgs/Maizzen.webp",
     tagline: "Mag. + Melatonina + Triptofano + B6 — sono profundo em 4 frentes",
     tags: ["Relaxamento mental", "Melhora o sono", "Combate a insônia", "Equilíbrio hormonal", "Reduz o estresse"],
     oque: "O Maizzen da Você-Mais+ é um suplemento completo que promove sono profundo, relaxamento e recuperação física e mental. A combinação de Magnésio, Melatonina, L-Triptofano e Vitamina B6 atua de forma sinérgica para melhorar a qualidade do sono e reduzir o estresse. Ideal para quem busca noites tranquilas e dias mais produtivos, com pureza e eficácia garantidas.",
@@ -1512,7 +1516,7 @@ document.querySelectorAll('[data-news]').forEach(function(card){
     card.setAttribute('data-name', p.name.toLowerCase());
     card.setAttribute('data-line', p.lineKey);
     card.innerHTML=
-      '<div class="prod-line-bar bg-'+p.lineKey+'"></div>'+
+      (p.img ? '<div class="prod-img-wrap"><img src="'+p.img+'" alt="'+p.name+'" loading="lazy"></div>' : '<div class="prod-line-bar bg-'+p.lineKey+'"></div>')+
       '<span class="prod-num">#'+p.id+'</span>'+
       '<div class="prod-line-badge bg-'+p.lineKey+'">'+p.line+'</div>'+
       '<div class="prod-name">'+p.name+'</div>'+
