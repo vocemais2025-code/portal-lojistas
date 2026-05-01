@@ -338,7 +338,8 @@
 <!-- HEADER -->
 <header>
   <div class="header-inner">
-    <a class="logo-wrap" href="#">
+    <a class="logo-wrap" href="#" onclick="document.querySelectorAll('nav a').forEach(function(a){a.classList.remove('active');}); document.querySelector('[data-view=catalog]').classList.add('active'); document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active');}); document.getElementById('catalog-view').classList.add('active'); window.scrollTo({top:0}); return false;">
+
       <img class="logo-img" src="logo-positiva.png" alt="você-mais+" />
       <div class="logo-divider"></div>
       <div class="logo-sub">Portal do Lojista Informado</div>
@@ -347,7 +348,7 @@
       <a data-view="catalog" class="active">Catálogo</a>
       <a data-view="kits">Kits</a>
       <a data-view="objectives">Por Objetivo</a>
-      <a data-view="today">Hoje</a>
+      <a data-view="today" style="display:flex;align-items:center;gap:6px;"><span class="live-dot" style="background:var(--c-energia);flex-shrink:0;"></span>News</a>
     </nav>
     <div class="header-date" id="header-date"></div>
   </div>
