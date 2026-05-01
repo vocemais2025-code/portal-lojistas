@@ -227,7 +227,8 @@
     .fit-label { font-size:10px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--gray-600); }
 
     /* HERO */
-    .hero { background:var(--navy); margin:-40px -40px 48px -40px; padding:80px 40px; display:grid; grid-template-columns:1.1fr 0.9fr; gap:60px; align-items:center; }
+    .hero-section { background:var(--navy); width:100%; }
+    .hero { max-width:1280px; margin:0 auto; padding:52px 40px; display:grid; grid-template-columns:1.1fr 0.9fr; gap:60px; align-items:center; }
     .hero-eyebrow { font-size:11px; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:rgba(254,218,20,.65); margin-bottom:28px; }
     .hero-title { font-size:clamp(52px,6.5vw,84px); font-weight:900; letter-spacing:-.04em; line-height:1.0; color:var(--white); margin-bottom:28px; }
     .hero-highlight { color:var(--yellow); }
@@ -269,7 +270,7 @@
 
     /* RESPONSIVE */
     @media(max-width:900px){
-      .hero{grid-template-columns:1fr; margin:-24px -20px 40px -20px; padding:56px 20px;} .hero-visual{display:none;}
+      .hero{grid-template-columns:1fr; padding:40px 20px;} .hero-visual{display:none;}
       .header-inner{padding:0 20px;} nav{display:none;}
       main{padding:24px 20px 60px;}
       .grid{grid-template-columns:1fr 1fr;grid-auto-rows:100px;gap:10px;}
@@ -360,7 +361,7 @@
 <!-- HEADER -->
 <header>
   <div class="header-inner">
-    <a class="logo-wrap" href="#" onclick="document.querySelectorAll('nav a').forEach(function(a){a.classList.remove('active');}); document.querySelector('[data-view=catalog]').classList.add('active'); document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active');}); document.getElementById('catalog-view').classList.add('active'); window.scrollTo({top:0}); return false;">
+    <a class="logo-wrap" href="#" onclick="document.querySelectorAll('nav a').forEach(function(a){a.classList.remove('active');}); document.querySelector('[data-view=catalog]').classList.add('active'); document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active');}); document.getElementById('catalog-view').classList.add('active'); document.getElementById('hero-section').style.display=''; window.scrollTo({top:0}); return false;">
 
       <img class="logo-img" src="logo-positiva.png" alt="você-mais+" />
       <div class="logo-divider"></div>
@@ -382,31 +383,35 @@
   <span class="alert-text"><strong>Pergunte antes de indicar:</strong> "O que você quer melhorar?" — quem é ouvido compra mais, volta mais e indica mais.</span>
 </div>
 
+<!-- HERO -->
+<section class="hero-section" id="hero-section">
+  <div class="hero">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Portal do Lojista · você-mais+</div>
+      <h1 class="hero-title">Venda com<br><span class="hero-highlight">argumento.</span></h1>
+      <p class="hero-sub">26 fichas completas, scripts de venda e inteligência de mercado — tudo em um lugar, atualizado em tempo real.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="hero-stat-num">26</span><span class="hero-stat-label">Produtos</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">6</span><span class="hero-stat-label">Linhas</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">∞</span><span class="hero-stat-label">Argumentos</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-vis-card">
+        <img src="hero.webp" alt="Lojista você-mais+" onerror="this.style.display='none'">
+      </div>
+      <div class="hero-vis-chip">
+        <span class="hero-vis-chip-num">26</span>
+        <span class="hero-vis-chip-label">produtos com<br>ficha completa</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- MAIN -->
 <main>
   <!-- CATALOGO -->
   <div id="catalog-view" class="view active">
-    <div class="hero">
-      <div class="hero-text">
-        <div class="hero-eyebrow">Portal do Lojista · você-mais+</div>
-        <h1 class="hero-title">Venda com<br><span class="hero-highlight">argumento.</span></h1>
-        <p class="hero-sub">26 fichas completas, scripts de venda e inteligência de mercado — tudo em um lugar, atualizado em tempo real.</p>
-        <div class="hero-stats">
-          <div class="hero-stat"><span class="hero-stat-num">26</span><span class="hero-stat-label">Produtos</span></div>
-          <div class="hero-stat"><span class="hero-stat-num">6</span><span class="hero-stat-label">Linhas</span></div>
-          <div class="hero-stat"><span class="hero-stat-num">∞</span><span class="hero-stat-label">Argumentos</span></div>
-        </div>
-      </div>
-      <div class="hero-visual">
-        <div class="hero-vis-card">
-          <img src="hero.webp" alt="Lojista você-mais+" onerror="this.style.display='none'">
-        </div>
-        <div class="hero-vis-chip">
-          <span class="hero-vis-chip-num">26</span>
-          <span class="hero-vis-chip-label">produtos com<br>ficha completa</span>
-        </div>
-      </div>
-    </div>
     <div class="catalog-top">
       <input type="text" class="search-input" id="prod-search" placeholder="Buscar produto..." />
       <div class="line-filters" id="line-filters">
@@ -1668,6 +1673,8 @@ document.querySelectorAll('nav a[data-view]').forEach(function(link){
     document.querySelectorAll('.view').forEach(function(v){ v.classList.remove('active'); });
     var target=document.getElementById(view+'-view');
     if(target) target.classList.add('active');
+    var hero=document.getElementById('hero-section');
+    if(hero) hero.style.display = (view==='catalog') ? '' : 'none';
     window.scrollTo({top:0,behavior:'smooth'});
   });
 });
