@@ -1508,6 +1508,8 @@ document.querySelectorAll('[data-news]').forEach(function(card){
     var p=PRODUCTS[id];
     var card=document.createElement('div');
     card.className='prod-card';
+    card.setAttribute('data-name', p.name.toLowerCase());
+    card.setAttribute('data-line', p.lineKey);
     card.innerHTML=
       '<div class="prod-line-bar bg-'+p.lineKey+'"></div>'+
       '<span class="prod-num">#'+p.id+'</span>'+
@@ -1522,6 +1524,8 @@ document.querySelectorAll('[data-news]').forEach(function(card){
   COMING_SOON.forEach(function(p){
     var card=document.createElement('div');
     card.className='prod-card coming-soon';
+    card.setAttribute('data-name', p.name.toLowerCase());
+    card.setAttribute('data-line', p.lineKey);
     card.innerHTML=
       '<div class="prod-line-bar bg-'+p.lineKey+'"></div>'+
       '<span class="prod-num">#'+p.id+'</span>'+
@@ -1620,6 +1624,35 @@ document.querySelectorAll('nav a[data-view]').forEach(function(link){
     var target=document.getElementById(view+'-view');
     if(target) target.classList.add('active');
     window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+
+/* SEARCH + LINE FILTERS */
+var currentLine = 'all';
+var currentSearch = '';
+
+function applyFilters() {
+  var cards = document.querySelectorAll('#product-grid .prod-card');
+  cards.forEach(function(card) {
+    var name = (card.getAttribute('data-name') || '').toLowerCase();
+    var line = card.getAttribute('data-line') || '';
+    var matchesSearch = currentSearch === '' || name.indexOf(currentSearch) !== -1;
+    var matchesLine = currentLine === 'all' || line === currentLine;
+    card.style.display = (matchesSearch && matchesLine) ? '' : 'none';
+  });
+}
+
+document.getElementById('prod-search').addEventListener('input', function() {
+  currentSearch = this.value.toLowerCase().trim();
+  applyFilters();
+});
+
+document.querySelectorAll('.lf-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.lf-btn').forEach(function(b) { b.classList.remove('active'); });
+    this.classList.add('active');
+    currentLine = this.getAttribute('data-line');
+    applyFilters();
   });
 });
 </script>
