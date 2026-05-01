@@ -226,6 +226,16 @@
     .fit-emoji { font-size:24px; display:block; margin-bottom:6px; }
     .fit-label { font-size:10px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--gray-600); }
 
+    /* HERO */
+    .hero { padding:72px 0 64px; border-bottom:1px solid var(--border); margin-bottom:40px; }
+    .hero-eyebrow { font-size:11px; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:var(--gray-400); margin-bottom:28px; }
+    .hero-title { font-size:clamp(52px,7.5vw,88px); font-weight:900; letter-spacing:-.04em; line-height:1.0; color:var(--black); margin-bottom:28px; }
+    .hero-highlight { color:var(--navy); text-decoration:underline; text-decoration-color:var(--yellow); text-decoration-thickness:10px; text-underline-offset:6px; }
+    .hero-sub { font-size:17px; color:var(--gray-600); line-height:1.65; max-width:580px; margin-bottom:44px; }
+    .hero-stats { display:flex; gap:48px; }
+    .hero-stat-num { font-size:30px; font-weight:900; color:var(--navy); letter-spacing:-.03em; display:block; line-height:1; margin-bottom:4px; }
+    .hero-stat-label { font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--gray-400); }
+
     /* ARCHIVE */
     .archive { background:var(--gray-50); border-top:1px solid var(--border); padding:56px 40px; }
     .archive-inner { max-width:1280px; margin:0 auto; }
@@ -367,6 +377,16 @@
 <main>
   <!-- CATALOGO -->
   <div id="catalog-view" class="view active">
+    <div class="hero">
+      <div class="hero-eyebrow">Portal do Lojista · você-mais+</div>
+      <h1 class="hero-title">Venda com<br><span class="hero-highlight">argumento.</span></h1>
+      <p class="hero-sub">26 fichas completas, scripts de venda e inteligência de mercado — tudo em um lugar, atualizado em tempo real.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="hero-stat-num">26</span><span class="hero-stat-label">Produtos</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">6</span><span class="hero-stat-label">Linhas</span></div>
+        <div class="hero-stat"><span class="hero-stat-num">∞</span><span class="hero-stat-label">Argumentos</span></div>
+      </div>
+    </div>
     <div class="catalog-top">
       <input type="text" class="search-input" id="prod-search" placeholder="Buscar produto..." />
       <div class="line-filters" id="line-filters">
