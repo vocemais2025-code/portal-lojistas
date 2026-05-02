@@ -111,7 +111,8 @@
 
     /* KITS */
     .kits-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:14px; }
-    .kit-card { border-radius:14px; padding:24px; border:1px solid var(--border); background:var(--white); }
+    .kit-card { border-radius:14px; padding:24px; border:1px solid var(--border); background:var(--white); cursor:pointer; transition:box-shadow .18s, transform .18s; }
+    .kit-card:hover { box-shadow:0 8px 32px rgba(0,39,110,.12); transform:translateY(-2px); }
     .kit-num { font-size:10px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--gray-400); margin-bottom:8px; }
     .kit-name { font-size:18px; font-weight:800; letter-spacing:-.025em; margin-bottom:6px; }
     .kit-tagline { font-size:13px; color:var(--gray-600); margin-bottom:14px; line-height:1.4; }
@@ -319,6 +320,11 @@
         <div class="modal-headline" id="m-headline"></div>
         <div class="modal-stars" id="m-stars"></div>
       </div>
+      <div id="hdr-kit" style="display:none">
+        <div class="mp-line-badge" style="background:var(--yellow);color:var(--navy)" id="mk-num"></div>
+        <div class="mp-name" id="mk-name"></div>
+        <div class="mp-format" id="mk-tagline"></div>
+      </div>
     </div>
     <div class="modal-body">
       <div id="body-product" style="display:none">
@@ -329,6 +335,12 @@
         <div class="modal-sec"><div class="modal-sec-title">Objeções e respostas</div><div id="mp-objecoes"></div></div>
         <div class="modal-sec"><div class="modal-sec-title">Combina com</div><div class="modal-combina" id="mp-combina"></div></div>
         <div class="modal-balcao"><div class="balcao-accent"></div><div class="balcao-lbl">Argumento para o Balcão</div><div class="balcao-text" id="mp-balcao"></div></div>
+      </div>
+      <div id="body-kit" style="display:none">
+        <div class="modal-sec"><div class="modal-sec-title">Produtos do Kit</div><div class="modal-combina" id="mk-produtos"></div></div>
+        <div class="modal-sec"><div class="modal-sec-title">Para quem é este kit</div><ul class="modal-list" id="mk-paraquem"></ul></div>
+        <div class="modal-sec"><div class="modal-sec-title">Argumentos de venda</div><div id="mk-argumentos"></div></div>
+        <div class="modal-balcao"><div class="balcao-accent"></div><div class="balcao-lbl">Argumento para o Balcão</div><div class="balcao-text" id="mk-balcao"></div></div>
       </div>
       <div id="body-news" style="display:none">
         <div class="modal-sec">
@@ -1438,16 +1450,75 @@ var COMING_SOON = [];
    KITS
    ==================================================== */
 var KITS = [
-  { id:1,  name:"Kit Emagrecimento",       tagline:"Três frentes de um mesmo objetivo",          products:["S.B.+ (Seca Barriga)","Laranja Moro + blend","Feno Grego"],          desc:"O S.B.+ apoia o metabolismo, a Laranja Moro age na gordura abdominal e o Feno Grego controla o apetite e regula a glicose. Emagrecimento que respeita o corpo." },
-  { id:2,  name:"Kit Sono",                tagline:"O trio do descanso profundo",                products:["Magnésio Treonato","Maizzen","Triptofano"],                           desc:"Triptofano fabrica serotonina e melatonina; Magnésio Treonato alivia tensão e age no cérebro; Maizzen fecha o ciclo com melatonina e B6. Para quem acorda cansado ou não consegue desligar." },
-  { id:3,  name:"Kit Beleza",              tagline:"De dentro para fora",                        products:["Colágeno + Completo","Pinus Pinaster","Panto H.S.N"],                 desc:"O Colágeno + Completo repõe firmeza e elasticidade, o Pinus Pinaster protege contra o envelhecimento, e o Panto H.S.N fortalece cabelo e unhas." },
-  { id:4,  name:"Kit Foco e Energia",      tagline:"Energia que não abandona no meio do dia",    products:["TAZ","Creatina em Pó","Vitamina B12"],                               desc:"TAZ entrega energia e foco imediatos; Creatina sustenta a performance muscular e cerebral; B12 garante o metabolismo energético que sustenta tudo." },
-  { id:5,  name:"Kit Imunidade",           tagline:"A tríade da defesa",                         products:["Imuni","A.D.E.K","NAC (N-Acetilcisteína)"],                          desc:"Imuni combina alho, própolis, vitamina C e cúrcuma; A.D.E.K repõe as vitaminas lipossolúveis essenciais; NAC é precursor da glutationa, o maior antioxidante endógeno." },
-  { id:6,  name:"Kit Ossos e Articulações",tagline:"Estrutura que dura",                         products:["Artromais","Vitamina D3 + K2","Cálcio MDK"],                         desc:"Artromais protege as articulações com colágeno tipo II, glucosamina e condroitina; D3+K2 garante que o cálcio vá para os ossos; Cálcio MDK fecha o ciclo mineral." },
-  { id:7,  name:"Kit Hormonal Feminino",   tagline:"Equilíbrio em todas as fases da vida",       products:["Feno Grego","Inositol","New Pausa"],                                 desc:"Feno Grego regula metabolismo e libido; Inositol equilibra humor, hormônios e ansiedade; New Pausa foi formulado especificamente para o suporte na menopausa." },
-  { id:8,  name:"Kit Longevidade",         tagline:"Cuidado que se acumula com o tempo",         products:["NAC (N-Acetilcisteína)","Coenzima Q10","Ômega 3 / Óleo de Peixe"],  desc:"NAC protege as células do estresse oxidativo; Q10 é essencial para energia mitocondrial; Ômega 3 reduz inflamação sistêmica e protege o cérebro e o coração." },
-  { id:9,  name:"Kit Performance",         tagline:"Para quem treina com seriedade",              products:["Creatina em Pó","TAZ","MAG-7"],                                      desc:"Creatina aumenta força e recuperação; TAZ prepara para o esforço com energia e vasodilatação; MAG-7 sustenta a função muscular e a recuperação completa com 7 formas de magnésio." },
-  { id:10, name:"Kit Detox e Vitalidade",  tagline:"Limpeza e recarregamento",                   products:["NAC (N-Acetilcisteína)","Cúrcuma","Complexo B"],                    desc:"NAC apoia a detoxificação hepática; Cúrcuma combate a inflamação crônica; Complexo B recarrega o metabolismo energético e o sistema nervoso." }
+  { id:1, name:"Kit Emagrecimento", tagline:"Três frentes de um mesmo objetivo",
+    products:["S.B.+ (Seca Barriga)","Laranja Moro + blend","Feno Grego"],
+    desc:"O S.B.+ apoia o metabolismo, a Laranja Moro age na gordura abdominal e o Feno Grego controla o apetite e regula a glicose. Emagrecimento que respeita o corpo.",
+    paraQuem:["Quem quer emagrecer com saúde e de forma sustentável","Quem tem dificuldade de controlar o apetite e a vontade de doce","Quem quer reduzir medidas, especialmente na região abdominal"],
+    argumentos:["O S.B.+ acelera o metabolismo; a Laranja Moro age diretamente na gordura abdominal; o Feno Grego controla o apetite e a glicose — três mecanismos distintos que se complementam sem se repetir.","A maioria dos produtos de emagrecimento trabalha em uma frente só. O kit trabalha nas três ao mesmo tempo: queima de gordura, controle do apetite e regulação metabólica.","Sem estimulantes agressivos. Resultado mais sustentável, com menos efeito rebote e mais respeito ao organismo."],
+    balcao:"\"Se quer emagrecer, um produto isolado é como pedalar com uma roda furada. O kit fecha os três pontos ao mesmo tempo: queima, controla e acelera o metabolismo.\"" },
+
+  { id:2, name:"Kit Sono", tagline:"O trio do descanso profundo",
+    products:["Magnésio Treonato","Maizzen","Triptofano"],
+    desc:"Triptofano fabrica serotonina e melatonina; Magnésio Treonato alivia tensão e age no cérebro; Maizzen fecha o ciclo com melatonina e B6. Para quem acorda cansado ou não consegue desligar.",
+    paraQuem:["Quem tem dificuldade para adormecer ou acorda durante a noite","Quem acorda cansado mesmo dormindo horas suficientes","Quem vive com ansiedade ou pensamentos acelerados na hora de dormir"],
+    argumentos:["O Triptofano fabrica serotonina e melatonina; o Magnésio Treonato atravessa a barreira cerebral e alivia a tensão neural; o Maizzen fecha o ciclo com melatonina e B6. Cada um age em uma etapa diferente do sono.","Não é sedação — é o sono natural sendo restaurado passo a passo. O cliente acorda descansado, sem sonolência residual.","Em 7 a 14 dias a maioria relata adormecer mais rápido, acordar menos vezes e ter mais energia no dia seguinte."],
+    balcao:"\"Não é um produto para dormir — são três que atuam em sequência: um para relaxar, um para adormecer e um para manter o sono profundo. É a diferença entre cair de cansaço e descansar de verdade.\"" },
+
+  { id:3, name:"Kit Beleza", tagline:"De dentro para fora",
+    products:["Colágeno + Completo","Pinus Pinaster","Panto H.S.N"],
+    desc:"O Colágeno + Completo repõe firmeza e elasticidade, o Pinus Pinaster protege contra o envelhecimento, e o Panto H.S.N fortalece cabelo e unhas.",
+    paraQuem:["Quem quer melhorar pele, cabelo e unhas de dentro para fora","Mulheres a partir dos 30 que percebem queda de cabelo ou perda de firmeza","Quem já usa produtos tópicos mas quer potencializar com nutrição celular"],
+    argumentos:["O Colágeno + Completo repõe firmeza e elasticidade; o Pinus Pinaster é um dos antioxidantes mais potentes para a pele; o Panto H.S.N nutre especificamente cabelo e unhas com biotina e zinco.","Creme não nutre de dentro. O kit trabalha na origem — na célula — onde o resultado é estrutural e duradouro.","Em 30 a 60 dias a maioria das clientes relata cabelo mais forte, pele mais firme e unhas que voltam a crescer com saúde."],
+    balcao:"\"Creme hidrata a superfície, mas queda de cabelo e flacidez vêm de dentro. Esse kit nutre na origem — onde o resultado é de verdade.\"" },
+
+  { id:4, name:"Kit Foco e Energia", tagline:"Energia que não abandona no meio do dia",
+    products:["TAZ","Creatina em Pó","Vitamina B12"],
+    desc:"TAZ entrega energia e foco imediatos; Creatina sustenta a performance muscular e cerebral; B12 garante o metabolismo energético que sustenta tudo.",
+    paraQuem:["Quem trabalha muito e sente queda de energia e concentração ao longo do dia","Quem pratica esportes e quer mais performance física e mental","Quem toma café para se manter acordado mas sofre com o crash depois"],
+    argumentos:["O TAZ entrega energia e foco nos primeiros 30 minutos; a Creatina sustenta performance física e cerebral ao longo do dia; a B12 garante o metabolismo energético de base que mantém tudo funcionando.","Sem crash, sem dependência. O combo atua em camadas: energia imediata + resistência + sustentação metabólica.","Clientela que treina vai querer para a academia. Clientela que trabalha vai querer para o escritório. É um kit de altíssima versatilidade de indicação."],
+    balcao:"\"O TAZ acende o motor, a Creatina mantém na potência e a B12 garante que o combustível não acabe. É energia que dura o dia todo, sem o crash do café.\"" },
+
+  { id:5, name:"Kit Imunidade", tagline:"A tríade da defesa",
+    products:["Imuni","A.D.E.K","NAC (N-Acetilcisteína)"],
+    desc:"Imuni combina alho, própolis, vitamina C e cúrcuma; A.D.E.K repõe as vitaminas lipossolúveis essenciais; NAC é precursor da glutationa, o maior antioxidante endógeno.",
+    paraQuem:["Quem adoece com frequência ou leva tempo para se recuperar","Quem quer fortalecer a defesa naturalmente, sem medicamentos","Quem passou por período de estresse intenso, uso de antibióticos ou cirurgia"],
+    argumentos:["O Imuni usa alho, própolis, vitamina C e cúrcuma — imunidade e anti-inflamação ao mesmo tempo. O A.D.E.K repõe vitaminas lipossolúveis que a maioria não tem em dose adequada. O NAC é precursor da glutationa, o maior antioxidante do organismo.","Três níveis de proteção: bloqueio (própolis e cúrcuma), reparo celular (NAC e glutationa) e regulação imune (A, D, E, K).","Para quem vive em ambientes fechados, tem contato com muita gente ou quer proteger o sistema imune o ano todo."],
+    balcao:"\"Esse kit não é para quando você já está doente. É para garantir que o corpo se defenda antes de adoecer.\"" },
+
+  { id:6, name:"Kit Ossos e Articulações", tagline:"Estrutura que dura",
+    products:["Artromais","Vitamina D3 + K2","Cálcio MDK"],
+    desc:"Artromais protege as articulações com colágeno tipo II, glucosamina e condroitina; D3+K2 garante que o cálcio vá para os ossos; Cálcio MDK fecha o ciclo mineral.",
+    paraQuem:["Quem sente dores articulares ou rigidez pela manhã","Quem pratica atividade física e quer proteger cartilagem e articulações","Mulheres acima de 40 anos com risco de osteoporose ou perda de massa óssea"],
+    argumentos:["O Artromais protege e repara as articulações com colágeno tipo II, glucosamina e condroitina. O D3+K2 garante que o cálcio vá para os ossos em vez das artérias. O Cálcio MDK fecha o ciclo mineral completo.","Não é para aliviar a dor — é para reconstruir a estrutura. Resultado em 60 a 90 dias, mas que dura.","Para quem já usa anti-inflamatório com frequência: esse kit trata a causa, não o sintoma — e pode reduzir a necessidade de medicação."],
+    balcao:"\"Anti-inflamatório trata a dor. Esse kit trata a causa. A diferença é entre aliviar agora e não doer mais daqui a 3 meses.\"" },
+
+  { id:7, name:"Kit Hormonal Feminino", tagline:"Equilíbrio em todas as fases da vida",
+    products:["Feno Grego","Inositol","New Pausa"],
+    desc:"Feno Grego regula metabolismo e libido; Inositol equilibra humor, hormônios e ansiedade; New Pausa foi formulado especificamente para o suporte na menopausa.",
+    paraQuem:["Mulheres com TPM intensa, ciclo irregular ou desequilíbrio hormonal","Mulheres na perimenopausa ou menopausa buscando mais equilíbrio","Quem sofre com ansiedade, humor instável e sono ruim ligados ao ciclo"],
+    argumentos:["O Feno Grego regula metabolismo e apoia a libido; o Inositol equilibra hormônios, reduz ansiedade e melhora a sensibilidade à insulina; o New Pausa foi formulado especificamente para o suporte na menopausa.","Um kit que fala diretamente com a mulher sobre o que ela realmente sente, sem termos técnicos. Isso cria conexão, confiança e fidelização.","O trio é complementar por natureza: cada produto age em um eixo hormonal diferente, sem conflito ou sobreposição."],
+    balcao:"\"TPM forte, humor instável, sono ruim — muitas vezes é tudo hormonal. Esse kit aborda os três pontos ao mesmo tempo, de forma natural e segura.\"" },
+
+  { id:8, name:"Kit Longevidade", tagline:"Cuidado que se acumula com o tempo",
+    products:["NAC (N-Acetilcisteína)","Coenzima Q10","Ômega 3 / Óleo de Peixe"],
+    desc:"NAC protege as células do estresse oxidativo; Q10 é essencial para energia mitocondrial; Ômega 3 reduz inflamação sistêmica e protege o cérebro e o coração.",
+    paraQuem:["Pessoas acima de 40 anos que querem cuidar proativamente da saúde a longo prazo","Quem tem histórico familiar de problemas cardiovasculares, cognitivos ou metabólicos","Quem quer envelhecer com mais qualidade de vida e menos dependência de medicamentos"],
+    argumentos:["NAC protege as células do estresse oxidativo; o Q10 é essencial para a energia mitocondrial — que cai com a idade e com o uso de estatinas; o Ômega 3 reduz inflamação sistêmica, protege o cérebro e o coração.","Longevidade não é viver mais — é viver melhor. Esse kit atua na raiz do envelhecimento celular.","Ticket alto, cliente muito fiel. Quem começa esse kit dificilmente para, porque sente a diferença no dia a dia."],
+    balcao:"\"A maioria das doenças crônicas começa com inflamação e estresse oxidativo. Esse kit age nesses dois pontos antes que o problema apareça.\"" },
+
+  { id:9, name:"Kit Performance", tagline:"Para quem treina com seriedade",
+    products:["Creatina em Pó","TAZ","MAG-7"],
+    desc:"Creatina aumenta força e recuperação; TAZ prepara para o esforço com energia e vasodilatação; MAG-7 sustenta a função muscular e a recuperação completa com 7 formas de magnésio.",
+    paraQuem:["Quem treina com regularidade e quer mais força, resistência e recuperação","Atletas amadores ou competidores que buscam vantagem legal e segura","Quem treina duro mas sente que a recuperação está mais lenta do que deveria"],
+    argumentos:["A Creatina aumenta força, potência e recuperação muscular — com mais de 500 estudos clínicos comprovando. O TAZ prepara o organismo para o esforço com energia e vasodilatação. O MAG-7 sustenta a função muscular e garante recuperação mineral completa.","Pré-treino + desempenho + recuperação. O ciclo completo de performance em um único kit.","Para o cliente que já usa Creatina: o kit adiciona o que falta — ativação pré-treino e recuperação mineral. É o upgrade natural da rotina atual."],
+    balcao:"\"Creatina faz você render mais. TAZ prepara o corpo para o esforço. MAG-7 garante que você se recupere. É o ciclo completo de quem treina de verdade.\"" },
+
+  { id:10, name:"Kit Detox e Vitalidade", tagline:"Limpeza e recarregamento",
+    products:["NAC (N-Acetilcisteína)","Cúrcuma","Complexo B"],
+    desc:"NAC apoia a detoxificação hepática; Cúrcuma combate a inflamação crônica; Complexo B recarrega o metabolismo energético e o sistema nervoso.",
+    paraQuem:["Quem se sente cansado, pesado ou sem energia sem razão aparente","Quem passou por período de excessos, uso de medicamentos ou estresse intenso","Quem quer fazer uma limpeza do organismo de forma segura e nutrida"],
+    argumentos:["O NAC apoia a detoxificação hepática e é precursor da glutationa. A Cúrcuma combate a inflamação crônica que drena energia e prejudica a imunidade. O Complexo B recarrega o sistema nervoso e o metabolismo energético.","Detox de verdade não é só chá e laxante. É dar ao fígado e às células o que precisam para se limpar e se regenerar.","Em 2 a 3 semanas a maioria relata mais energia, digestão mais leve e humor mais estável — porque o problema estava na inflamação e na sobrecarga hepática."],
+    balcao:"\"Cansaço sem motivo, digestão pesada, humor instável — muitas vezes é o fígado pedindo socorro. Esse kit dá ao organismo o que precisa para se limpar por dentro.\"" }
 ];
 
 /* ====================================================
@@ -1514,12 +1585,34 @@ function closeModal(){
   document.body.style.overflow='';
   document.querySelectorAll('.modal-fit-btn').forEach(function(b){ b.classList.remove('selected'); });
 }
+function hideAllModalPanels(){
+  ['hdr-product','hdr-news','hdr-kit','body-product','body-news','body-kit'].forEach(function(id){
+    document.getElementById(id).style.display='none';
+  });
+}
+function openKitModal(kitId){
+  var kit=KITS.find(function(k){ return k.id===kitId; }); if(!kit) return;
+  hideAllModalPanels();
+  document.getElementById('hdr-kit').style.display='';
+  document.getElementById('body-kit').style.display='';
+  document.getElementById('mk-num').textContent='Kit '+kit.id+' de '+KITS.length;
+  document.getElementById('mk-name').textContent=kit.name;
+  document.getElementById('mk-tagline').textContent=kit.tagline;
+  var prods=document.getElementById('mk-produtos'); prods.innerHTML='';
+  kit.products.forEach(function(p){ var s=document.createElement('span'); s.className='combina-badge'; s.textContent=p; prods.appendChild(s); });
+  var pq=document.getElementById('mk-paraquem'); pq.innerHTML='';
+  kit.paraQuem.forEach(function(t){ var li=document.createElement('li'); li.textContent=t; pq.appendChild(li); });
+  var ag=document.getElementById('mk-argumentos'); ag.innerHTML='';
+  kit.argumentos.forEach(function(t){ var d=document.createElement('div'); d.className='modal-script'; d.textContent=t; ag.appendChild(d); });
+  document.getElementById('mk-balcao').textContent=kit.balcao;
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
 function openProductModal(id){
   var p=PRODUCTS[id]; if(!p) return;
+  hideAllModalPanels();
   document.getElementById('hdr-product').style.display='';
-  document.getElementById('hdr-news').style.display='none';
   document.getElementById('body-product').style.display='';
-  document.getElementById('body-news').style.display='none';
   document.getElementById('mp-line').textContent = p.line;
   document.getElementById('mp-name').textContent = p.name;
   document.getElementById('mp-format').textContent = p.format;
@@ -1543,9 +1636,8 @@ function openProductModal(id){
   document.body.style.overflow='hidden';
 }
 function openNewsModal(d){
-  document.getElementById('hdr-product').style.display='none';
+  hideAllModalPanels();
   document.getElementById('hdr-news').style.display='';
-  document.getElementById('body-product').style.display='none';
   document.getElementById('body-news').style.display='';
   document.getElementById('m-tag').textContent=d.tag;
   document.getElementById('m-headline').textContent=d.headline;
@@ -1624,7 +1716,9 @@ document.querySelectorAll('[data-news]').forEach(function(card){
       '<div class="kit-name">'+kit.name+'</div>'+
       '<div class="kit-tagline">'+kit.tagline+'</div>'+
       '<div class="kit-products">'+kit.products.map(function(p){ return '<span class="kit-prod-badge">'+p+'</span>'; }).join('')+'</div>'+
-      '<div class="kit-desc">'+kit.desc+'</div>';
+      '<div class="kit-desc">'+kit.desc+'</div>'+
+      '<div class="prod-cta" style="margin-top:18px"><span class="prod-cta-label">Ver argumentos de venda</span><div class="prod-arrow">→</div></div>';
+    (function(k){ card.addEventListener('click',function(){ openKitModal(k.id); }); })(kit);
     grid.appendChild(card);
   });
 })();
