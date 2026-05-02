@@ -1754,7 +1754,7 @@ var OBJECTIVES = [
           found++;
           var card=document.createElement('div'); card.className='prod-card';
           card.innerHTML=
-            '<div class="prod-line-bar bg-'+p.lineKey+'"></div>'+
+            (p.img ? '<div class="prod-img-wrap"><img src="'+p.img+'" alt="'+p.name+'" loading="lazy"></div>' : '<div class="prod-line-bar bg-'+p.lineKey+'"></div>')+
             '<span class="prod-num">#'+p.id+'</span>'+
             '<div class="prod-line-badge bg-'+p.lineKey+'">'+p.line+'</div>'+
             '<div class="prod-name">'+p.name+'</div>'+
