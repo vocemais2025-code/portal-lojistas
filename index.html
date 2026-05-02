@@ -1579,7 +1579,9 @@ document.querySelectorAll('[data-news]').forEach(function(card){
 /* CATÁLOGO — renderiza produto(s) + em breve */
 (function(){
   var grid=document.getElementById('product-grid');
-  Object.keys(PRODUCTS).forEach(function(id){
+  Object.keys(PRODUCTS).sort(function(a,b){
+    return PRODUCTS[a].name.localeCompare(PRODUCTS[b].name, 'pt-BR');
+  }).forEach(function(id){
     var p=PRODUCTS[id];
     var card=document.createElement('div');
     card.className='prod-card';
