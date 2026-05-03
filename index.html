@@ -111,8 +111,10 @@
 
     /* KITS */
     .kits-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:14px; }
-    .kit-card { border-radius:14px; padding:24px; border:1px solid var(--border); background:var(--white); cursor:pointer; transition:box-shadow .18s, transform .18s; }
+    .kit-card { border-radius:14px; overflow:hidden; border:1px solid var(--border); background:var(--white); cursor:pointer; transition:box-shadow .18s, transform .18s; }
     .kit-card:hover { box-shadow:0 8px 32px rgba(0,39,110,.12); transform:translateY(-2px); }
+    .kit-card-img { width:100%; height:180px; object-fit:cover; display:block; background:var(--gray-100); }
+    .kit-card-body { padding:22px 24px 20px; }
     .kit-num { font-size:10px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--gray-400); margin-bottom:8px; }
     .kit-name { font-size:18px; font-weight:800; letter-spacing:-.025em; margin-bottom:6px; }
     .kit-tagline { font-size:13px; color:var(--gray-600); margin-bottom:14px; line-height:1.4; }
@@ -354,6 +356,7 @@
         <div class="modal-share-row"><a id="mp-wpp" class="btn-whatsapp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.557 4.126 1.533 5.858L.057 23.486a.5.5 0 0 0 .612.612l5.628-1.476A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.882a9.877 9.877 0 0 1-5.034-1.378l-.36-.214-3.742.981.998-3.648-.235-.374A9.865 9.865 0 0 1 2.118 12C2.118 6.533 6.533 2.118 12 2.118c5.466 0 9.882 4.415 9.882 9.882 0 5.466-4.416 9.882-9.882 9.882z"/></svg>Compartilhar no WhatsApp</a></div>
       </div>
       <div id="body-kit" style="display:none">
+        <img id="mk-img" src="" alt="" style="width:100%;height:220px;object-fit:cover;display:none;border-radius:0;margin-bottom:0;">
         <div class="modal-sec"><div class="modal-sec-title">Produtos do Kit</div><div class="modal-combina" id="mk-produtos"></div></div>
         <div class="modal-sec"><div class="modal-sec-title">Para quem é este kit</div><ul class="modal-list" id="mk-paraquem"></ul></div>
         <div class="modal-sec"><div class="modal-sec-title">Argumentos de venda</div><div id="mk-argumentos"></div></div>
@@ -1442,70 +1445,70 @@ var COMING_SOON = [];
    KITS
    ==================================================== */
 var KITS = [
-  { id:1, name:"Kit Emagrecimento", tagline:"Três frentes de um mesmo objetivo",
+  { id:1, name:"Kit Emagrecimento", img:"Kit Emagrecimento.webp", tagline:"Três frentes de um mesmo objetivo",
     products:["S.B.+ (Seca Barriga)","Laranja Moro + blend","Feno Grego"],
     desc:"O S.B.+ apoia o metabolismo, a Laranja Moro age na gordura abdominal e o Feno Grego controla o apetite e regula a glicose. Emagrecimento que respeita o corpo.",
     paraQuem:["Quem quer emagrecer com saúde e de forma sustentável","Quem tem dificuldade de controlar o apetite e a vontade de doce","Quem quer reduzir medidas, especialmente na região abdominal"],
     argumentos:["O S.B.+ acelera o metabolismo; a Laranja Moro age diretamente na gordura abdominal; o Feno Grego controla o apetite e a glicose — três mecanismos distintos que se complementam sem se repetir.","A maioria dos produtos de emagrecimento trabalha em uma frente só. O kit trabalha nas três ao mesmo tempo: queima de gordura, controle do apetite e regulação metabólica.","Sem estimulantes agressivos. Resultado mais sustentável, com menos efeito rebote e mais respeito ao organismo."],
     balcao:"\"Se quer emagrecer, um produto isolado é como pedalar com uma roda furada. O kit fecha os três pontos ao mesmo tempo: queima, controla e acelera o metabolismo.\"" },
 
-  { id:2, name:"Kit Sono", tagline:"O trio do descanso profundo",
+  { id:2, name:"Kit Sono", img:"Kit Sono.webp", tagline:"O trio do descanso profundo",
     products:["Magnésio Treonato","Maizzen","Triptofano"],
     desc:"Triptofano fabrica serotonina e melatonina; Magnésio Treonato alivia tensão e age no cérebro; Maizzen fecha o ciclo com melatonina e B6. Para quem acorda cansado ou não consegue desligar.",
     paraQuem:["Quem tem dificuldade para adormecer ou acorda durante a noite","Quem acorda cansado mesmo dormindo horas suficientes","Quem vive com ansiedade ou pensamentos acelerados na hora de dormir"],
     argumentos:["O Triptofano fabrica serotonina e melatonina; o Magnésio Treonato atravessa a barreira cerebral e alivia a tensão neural; o Maizzen fecha o ciclo com melatonina e B6. Cada um age em uma etapa diferente do sono.","Não é sedação — é o sono natural sendo restaurado passo a passo. O cliente acorda descansado, sem sonolência residual.","Em 7 a 14 dias a maioria relata adormecer mais rápido, acordar menos vezes e ter mais energia no dia seguinte."],
     balcao:"\"Não é um produto para dormir — são três que atuam em sequência: um para relaxar, um para adormecer e um para manter o sono profundo. É a diferença entre cair de cansaço e descansar de verdade.\"" },
 
-  { id:3, name:"Kit Beleza", tagline:"De dentro para fora",
+  { id:3, name:"Kit Beleza", img:"Kit Beleza.webp", tagline:"De dentro para fora",
     products:["Colágeno + Completo","Pinus Pinaster","Panto H.S.N"],
     desc:"O Colágeno + Completo repõe firmeza e elasticidade, o Pinus Pinaster protege contra o envelhecimento, e o Panto H.S.N fortalece cabelo e unhas.",
     paraQuem:["Quem quer melhorar pele, cabelo e unhas de dentro para fora","Mulheres a partir dos 30 que percebem queda de cabelo ou perda de firmeza","Quem já usa produtos tópicos mas quer potencializar com nutrição celular"],
     argumentos:["O Colágeno + Completo repõe firmeza e elasticidade; o Pinus Pinaster é um dos antioxidantes mais potentes para a pele; o Panto H.S.N nutre especificamente cabelo e unhas com biotina e zinco.","Creme não nutre de dentro. O kit trabalha na origem — na célula — onde o resultado é estrutural e duradouro.","Em 30 a 60 dias a maioria das clientes relata cabelo mais forte, pele mais firme e unhas que voltam a crescer com saúde."],
     balcao:"\"Creme hidrata a superfície, mas queda de cabelo e flacidez vêm de dentro. Esse kit nutre na origem — onde o resultado é de verdade.\"" },
 
-  { id:4, name:"Kit Foco e Energia", tagline:"Energia que não abandona no meio do dia",
+  { id:4, name:"Kit Foco e Energia", img:"Kit Foco e Energia.webp", tagline:"Energia que não abandona no meio do dia",
     products:["TAZ","Creatina em Pó","Vitamina B12"],
     desc:"TAZ entrega energia e foco imediatos; Creatina sustenta a performance muscular e cerebral; B12 garante o metabolismo energético que sustenta tudo.",
     paraQuem:["Quem trabalha muito e sente queda de energia e concentração ao longo do dia","Quem pratica esportes e quer mais performance física e mental","Quem toma café para se manter acordado mas sofre com o crash depois"],
     argumentos:["O TAZ entrega energia e foco nos primeiros 30 minutos; a Creatina sustenta performance física e cerebral ao longo do dia; a B12 garante o metabolismo energético de base que mantém tudo funcionando.","Sem crash, sem dependência. O combo atua em camadas: energia imediata + resistência + sustentação metabólica.","Clientela que treina vai querer para a academia. Clientela que trabalha vai querer para o escritório. É um kit de altíssima versatilidade de indicação."],
     balcao:"\"O TAZ acende o motor, a Creatina mantém na potência e a B12 garante que o combustível não acabe. É energia que dura o dia todo, sem o crash do café.\"" },
 
-  { id:5, name:"Kit Imunidade", tagline:"A tríade da defesa",
+  { id:5, name:"Kit Imunidade", img:"Kit Imunidade.webp", tagline:"A tríade da defesa",
     products:["Imuni","A.D.E.K","NAC (N-Acetilcisteína)"],
     desc:"Imuni combina alho, própolis, vitamina C e cúrcuma; A.D.E.K repõe as vitaminas lipossolúveis essenciais; NAC é precursor da glutationa, o maior antioxidante endógeno.",
     paraQuem:["Quem adoece com frequência ou leva tempo para se recuperar","Quem quer fortalecer a defesa naturalmente, sem medicamentos","Quem passou por período de estresse intenso, uso de antibióticos ou cirurgia"],
     argumentos:["O Imuni usa alho, própolis, vitamina C e cúrcuma — imunidade e anti-inflamação ao mesmo tempo. O A.D.E.K repõe vitaminas lipossolúveis que a maioria não tem em dose adequada. O NAC é precursor da glutationa, o maior antioxidante do organismo.","Três níveis de proteção: bloqueio (própolis e cúrcuma), reparo celular (NAC e glutationa) e regulação imune (A, D, E, K).","Para quem vive em ambientes fechados, tem contato com muita gente ou quer proteger o sistema imune o ano todo."],
     balcao:"\"Esse kit não é para quando você já está doente. É para garantir que o corpo se defenda antes de adoecer.\"" },
 
-  { id:6, name:"Kit Ossos e Articulações", tagline:"Estrutura que dura",
+  { id:6, name:"Kit Ossos e Articulações", img:"Kit Ossos e Articulações.webp", tagline:"Estrutura que dura",
     products:["Artromais","Vitamina D3 + K2","Cálcio MDK"],
     desc:"Artromais protege as articulações com colágeno tipo II, glucosamina e condroitina; D3+K2 garante que o cálcio vá para os ossos; Cálcio MDK fecha o ciclo mineral.",
     paraQuem:["Quem sente dores articulares ou rigidez pela manhã","Quem pratica atividade física e quer proteger cartilagem e articulações","Mulheres acima de 40 anos com risco de osteoporose ou perda de massa óssea"],
     argumentos:["O Artromais protege e repara as articulações com colágeno tipo II, glucosamina e condroitina. O D3+K2 garante que o cálcio vá para os ossos em vez das artérias. O Cálcio MDK fecha o ciclo mineral completo.","Não é para aliviar a dor — é para reconstruir a estrutura. Resultado em 60 a 90 dias, mas que dura.","Para quem já usa anti-inflamatório com frequência: esse kit trata a causa, não o sintoma — e pode reduzir a necessidade de medicação."],
     balcao:"\"Anti-inflamatório trata a dor. Esse kit trata a causa. A diferença é entre aliviar agora e não doer mais daqui a 3 meses.\"" },
 
-  { id:7, name:"Kit Hormonal Feminino", tagline:"Equilíbrio em todas as fases da vida",
+  { id:7, name:"Kit Hormonal Feminino", img:"Kit Hormonal Feminino.webp", tagline:"Equilíbrio em todas as fases da vida",
     products:["Feno Grego","Inositol","New Pausa"],
     desc:"Feno Grego regula metabolismo e libido; Inositol equilibra humor, hormônios e ansiedade; New Pausa foi formulado especificamente para o suporte na menopausa.",
     paraQuem:["Mulheres com TPM intensa, ciclo irregular ou desequilíbrio hormonal","Mulheres na perimenopausa ou menopausa buscando mais equilíbrio","Quem sofre com ansiedade, humor instável e sono ruim ligados ao ciclo"],
     argumentos:["O Feno Grego regula metabolismo e apoia a libido; o Inositol equilibra hormônios, reduz ansiedade e melhora a sensibilidade à insulina; o New Pausa foi formulado especificamente para o suporte na menopausa.","Um kit que fala diretamente com a mulher sobre o que ela realmente sente, sem termos técnicos. Isso cria conexão, confiança e fidelização.","O trio é complementar por natureza: cada produto age em um eixo hormonal diferente, sem conflito ou sobreposição."],
     balcao:"\"TPM forte, humor instável, sono ruim — muitas vezes é tudo hormonal. Esse kit aborda os três pontos ao mesmo tempo, de forma natural e segura.\"" },
 
-  { id:8, name:"Kit Longevidade", tagline:"Cuidado que se acumula com o tempo",
+  { id:8, name:"Kit Longevidade", img:"Kit Longevidade.webp", tagline:"Cuidado que se acumula com o tempo",
     products:["NAC (N-Acetilcisteína)","Coenzima Q10","Ômega 3 / Óleo de Peixe"],
     desc:"NAC protege as células do estresse oxidativo; Q10 é essencial para energia mitocondrial; Ômega 3 reduz inflamação sistêmica e protege o cérebro e o coração.",
     paraQuem:["Pessoas acima de 40 anos que querem cuidar proativamente da saúde a longo prazo","Quem tem histórico familiar de problemas cardiovasculares, cognitivos ou metabólicos","Quem quer envelhecer com mais qualidade de vida e menos dependência de medicamentos"],
     argumentos:["NAC protege as células do estresse oxidativo; o Q10 é essencial para a energia mitocondrial — que cai com a idade e com o uso de estatinas; o Ômega 3 reduz inflamação sistêmica, protege o cérebro e o coração.","Longevidade não é viver mais — é viver melhor. Esse kit atua na raiz do envelhecimento celular.","Ticket alto, cliente muito fiel. Quem começa esse kit dificilmente para, porque sente a diferença no dia a dia."],
     balcao:"\"A maioria das doenças crônicas começa com inflamação e estresse oxidativo. Esse kit age nesses dois pontos antes que o problema apareça.\"" },
 
-  { id:9, name:"Kit Performance", tagline:"Para quem treina com seriedade",
+  { id:9, name:"Kit Performance", img:"Kit Performance.webp", tagline:"Para quem treina com seriedade",
     products:["Creatina em Pó","TAZ","MAG-7"],
     desc:"Creatina aumenta força e recuperação; TAZ prepara para o esforço com energia e vasodilatação; MAG-7 sustenta a função muscular e a recuperação completa com 7 formas de magnésio.",
     paraQuem:["Quem treina com regularidade e quer mais força, resistência e recuperação","Atletas amadores ou competidores que buscam vantagem legal e segura","Quem treina duro mas sente que a recuperação está mais lenta do que deveria"],
     argumentos:["A Creatina aumenta força, potência e recuperação muscular — com mais de 500 estudos clínicos comprovando. O TAZ prepara o organismo para o esforço com energia e vasodilatação. O MAG-7 sustenta a função muscular e garante recuperação mineral completa.","Pré-treino + desempenho + recuperação. O ciclo completo de performance em um único kit.","Para o cliente que já usa Creatina: o kit adiciona o que falta — ativação pré-treino e recuperação mineral. É o upgrade natural da rotina atual."],
     balcao:"\"Creatina faz você render mais. TAZ prepara o corpo para o esforço. MAG-7 garante que você se recupere. É o ciclo completo de quem treina de verdade.\"" },
 
-  { id:10, name:"Kit Detox e Vitalidade", tagline:"Limpeza e recarregamento",
+  { id:10, name:"Kit Detox e Vitalidade", img:"Kit Detox e Vitalidade.webp", tagline:"Limpeza e recarregamento",
     products:["NAC (N-Acetilcisteína)","Cúrcuma","Complexo B"],
     desc:"NAC apoia a detoxificação hepática; Cúrcuma combate a inflamação crônica; Complexo B recarrega o metabolismo energético e o sistema nervoso.",
     paraQuem:["Quem se sente cansado, pesado ou sem energia sem razão aparente","Quem passou por período de excessos, uso de medicamentos ou estresse intenso","Quem quer fazer uma limpeza do organismo de forma segura e nutrida"],
@@ -1518,8 +1521,6 @@ var KITS = [
    Para adicionar nova notícia: inserir novo objeto no início do array.
    ==================================================== */
 var NEWS = [
-  {id:15,date:"2026-05-03",tag:"Benefícios · Vitamina D",stars:"⭐⭐⭐⭐⭐",headline:"2 em cada 3 brasileiros têm vitamina D inadequada — mesmo no verão: o argumento Fiocruz que abre a venda em qualquer cliente",summary:"Estudo epidemiológico multicêntrico da Fiocruz com adultos saudáveis em Salvador, São Paulo e Curitiba mostrou 50,9% de insuficiência e 15,3% de deficiência de vitamina D — somando dois terços da população, mesmo durante o verão e em cidades ensolaradas. Para o lojista, é o gatilho universal: praticamente qualquer cliente que entra na loja é candidato à dosagem e à suplementação D3 + K2.",source:"Fiocruz — Estudo Epidemiológico Multicêntrico de Vitamina D / Arquivos Brasileiros de Endocrinologia e Metabologia, 2024",curto:9,medio:10,longo:8,idea:"'Você sabia que pesquisa da Fiocruz mostrou que 2 em cada 3 brasileiros têm vitamina D inadequada — mesmo aqui no calor? Se você nunca dosou no exame de sangue, já vale começar pela D3 com K2: a D3 entrega o cálcio e a K2 é o GPS que manda esse cálcio para o osso, não para a artéria.'"},
-  {id:14,date:"2026-05-02",tag:"Regulação · ANVISA",stars:"⭐⭐⭐⭐⭐",headline:"ANVISA muda regra da cúrcuma em abril: o roteiro de 30 segundos que coloca o lojista como autoridade",summary:"Em 22/04/2026, a ANVISA publicou nova instrução normativa que recalcula o limite de curcuminoides totais e torna obrigatória a advertência no rótulo sobre risco hepático para gestantes, lactantes, crianças e pessoas com doenças do fígado, vesícula ou úlcera gástrica. A repercussão chegou ao consumidor — quem souber explicar a regra e oferecer alternativas seguras (ômega 3, colágeno tipo II) vira o consultor de confiança e protege a recompra.",source:"ANVISA — Instrução Normativa publicada em 22/04/2026 / Agência Brasil, 2026",curto:8,medio:9,longo:7,idea:"'A ANVISA atualizou em abril as regras da cúrcuma e agora o rótulo precisa avisar sobre risco hepático em alguns grupos. A nossa linha já está dentro da nova norma — e, se você se encaixa em alguma contraindicação, eu te mostro uma alternativa antiinflamatória mais segura.'"},
   {id:13,date:"2026-04-30",tag:"Perfil do Consumidor",stars:"⭐⭐⭐⭐⭐",headline:"O cliente de suplementos de 2026: quem é, o que quer e como a Você Mais+ te coloca à frente",summary:"Predominantemente mulher (58%), 30-50 anos, renda média-alta, que chega à loja já tendo pesquisado. Quer confirmação, não descoberta. Paga mais por quem demonstra conhecimento real. Os lojistas que crescem viram consultores — não vendedores.",source:"ABIAD + Opinion Box — Comportamento de Compra Suplementos Brasil 2025",curto:10,medio:9,longo:8,idea:"Posicione-se como consultor: 'Antes de te indicar qualquer coisa, me conta o que você está buscando melhorar.' O cliente que é ouvido compra mais, volta mais e indica mais."},
   {id:1,date:"2026-04-25",tag:"Benefícios · Feminino",stars:"⭐⭐⭐⭐⭐",headline:"Creatina não é só pra academia: mulheres ganham foco, energia e disposição em 30 dias",summary:"Estudos da Universidade de Saskatchewan e do Journal of the International Society of Sports Nutrition confirmam que mulheres que suplementam creatina reportam melhora cognitiva em 71% dos casos, além dos benefícios musculares tradicionais. A grande maioria das clientes ainda associa creatina exclusivamente a homens e musculação — criando uma oportunidade enorme para o lojista que sabe apresentar corretamente.",source:"Journal of the International Society of Sports Nutrition / Univ. Saskatchewan, 2025",curto:9,medio:9,longo:8,idea:"'A creatina é o suplemento com mais pesquisas científicas do mundo — e para mulheres, o benefício vai muito além do músculo. Em 30 dias, a maioria relata mais foco, menos fadiga mental e energia mais estável. Quer experimentar?'"},
   {id:2,date:"2026-04-21",tag:"Como Vender · Magnésio",stars:"⭐⭐⭐⭐⭐",headline:"3 perguntas que fecham a venda de magnésio em menos de 2 minutos",summary:"Pesquisa do IBGE estima que mais de 70% dos brasileiros têm deficiência subclínica de magnésio sem saber. Isso significa que a maioria dos clientes que entra na loja já é candidata ao produto, independentemente do motivo da visita.",source:"IBGE Pesquisa de Orçamentos Familiares / Ministério da Saúde, 2024",curto:10,medio:10,longo:8,idea:"Roteiro: (1) 'Como está seu sono?' (2) 'Sente ansiedade ou tensão?' (3) 'Tem câimbra ou cansaço muscular?' — Uma resposta 'sim' já justifica a indicação do magnésio quelado."},
@@ -1593,6 +1594,8 @@ function openKitModal(kitId){
   document.getElementById('mk-num').textContent='Kit '+kit.id+' de '+KITS.length;
   document.getElementById('mk-name').textContent=kit.name;
   document.getElementById('mk-tagline').textContent=kit.tagline;
+  var mkImg=document.getElementById('mk-img');
+  if(kit.img){ mkImg.src=kit.img; mkImg.alt=kit.name; mkImg.style.display='block'; } else { mkImg.style.display='none'; }
   var prods=document.getElementById('mk-produtos'); prods.innerHTML='';
   kit.products.forEach(function(p){ var s=document.createElement('span'); s.className='combina-badge'; s.textContent=p; prods.appendChild(s); });
   var pq=document.getElementById('mk-paraquem'); pq.innerHTML='';
@@ -1726,12 +1729,15 @@ document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeModal
   KITS.forEach(function(kit){
     var card=document.createElement('div'); card.className='kit-card';
     card.innerHTML=
+      (kit.img ? '<img class="kit-card-img" src="'+kit.img+'" alt="'+kit.name+'" loading="lazy">' : '')+
+      '<div class="kit-card-body">'+
       '<div class="kit-num">Kit '+kit.id+' de '+KITS.length+'</div>'+
       '<div class="kit-name">'+kit.name+'</div>'+
       '<div class="kit-tagline">'+kit.tagline+'</div>'+
       '<div class="kit-products">'+kit.products.map(function(p){ return '<span class="kit-prod-badge">'+p+'</span>'; }).join('')+'</div>'+
       '<div class="kit-desc">'+kit.desc+'</div>'+
-      '<div class="prod-cta" style="margin-top:18px"><span class="prod-cta-label">Ver argumentos de venda</span><div class="prod-arrow">→</div></div>';
+      '<div class="prod-cta" style="margin-top:18px"><span class="prod-cta-label">Ver argumentos de venda</span><div class="prod-arrow">→</div></div>'+
+      '</div>';
     (function(k){ card.addEventListener('click',function(){ openKitModal(k.id); }); })(kit);
     grid.appendChild(card);
   });
