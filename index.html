@@ -75,6 +75,9 @@
     main { max-width:1280px; margin:0 auto; padding:40px 40px 80px; }
 
     /* CATALOG */
+    .catalog-intro { padding-bottom:28px; margin-bottom:28px; border-bottom:1px solid var(--border); }
+    .catalog-intro-title { font-size:20px; font-weight:900; letter-spacing:-.02em; color:var(--black); margin-bottom:10px; }
+    .catalog-intro-text { font-size:14px; line-height:1.7; color:var(--gray-600); max-width:720px; }
     .catalog-top { display:flex; align-items:center; gap:14px; margin-bottom:24px; flex-wrap:wrap; }
     .search-input { flex:1; min-width:220px; padding:11px 16px; border-radius:10px; border:1px solid var(--border); font-family:inherit; font-size:14px; outline:none; transition:border-color .2s; }
     .search-input:focus { border-color:var(--navy); }
@@ -247,18 +250,18 @@
 
     /* HERO */
     .hero-section { background:var(--navy); width:100%; }
-    .hero { max-width:1280px; margin:0 auto; padding:52px 40px; display:grid; grid-template-columns:1.1fr 0.9fr; gap:60px; align-items:center; }
-    .hero-eyebrow { font-size:11px; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:rgba(254,218,20,.65); margin-bottom:28px; }
-    .hero-title { font-size:clamp(52px,6.5vw,84px); font-weight:900; letter-spacing:-.04em; line-height:1.0; color:var(--white); margin-bottom:28px; }
+    .hero { max-width:1280px; margin:0 auto; padding:32px 40px; display:grid; grid-template-columns:1.1fr 0.9fr; gap:60px; align-items:center; }
+    .hero-eyebrow { font-size:11px; font-weight:800; letter-spacing:.18em; text-transform:uppercase; color:rgba(254,218,20,.65); margin-bottom:20px; }
+    .hero-title { font-size:clamp(44px,5.5vw,72px); font-weight:900; letter-spacing:-.04em; line-height:1.0; color:var(--white); margin-bottom:20px; }
     .hero-highlight { color:var(--yellow); }
-    .hero-sub { font-size:17px; color:rgba(255,255,255,.6); line-height:1.65; max-width:520px; margin-bottom:44px; }
+    .hero-sub { font-size:16px; color:rgba(255,255,255,.6); line-height:1.65; max-width:520px; margin-bottom:32px; }
     .hero-stats { display:flex; gap:0; }
     .hero-stat { padding-right:36px; margin-right:36px; border-right:1px solid rgba(255,255,255,.15); }
     .hero-stat:last-child { border-right:none; padding-right:0; margin-right:0; }
     .hero-stat-num { font-size:32px; font-weight:900; color:var(--yellow); letter-spacing:-.03em; display:block; line-height:1; margin-bottom:5px; }
     .hero-stat-label { font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.4); }
     .hero-visual { position:relative; }
-    .hero-vis-card { border-radius:20px; overflow:hidden; aspect-ratio:4/5; background:rgba(255,255,255,.07); }
+    .hero-vis-card { border-radius:20px; overflow:hidden; aspect-ratio:4/4; background:rgba(255,255,255,.07); }
     .hero-vis-card img { width:100%; height:100%; object-fit:cover; display:block; }
     .hero-vis-chip { position:absolute; bottom:28px; left:-20px; background:var(--yellow); border-radius:14px; padding:16px 22px; box-shadow:0 12px 36px rgba(0,0,0,.35); }
     .hero-vis-chip-num { font-size:28px; font-weight:900; color:var(--navy); line-height:1; display:block; }
@@ -458,6 +461,10 @@
 <main>
   <!-- CATALOGO -->
   <div id="catalog-view" class="view active">
+    <div class="catalog-intro">
+      <div class="catalog-intro-title">Feito para você vender com confiança.</div>
+      <p class="catalog-intro-text">Aqui estão os 26 produtos da Você Mais+ com tudo que você precisa para fechar mais vendas — o que é cada produto, para quem indicar, como argumentar e como responder objeções. Filtre pelo objetivo do cliente, explore os Kits para aumentar o ticket e acompanhe a aba News para ter sempre um assunto novo no balcão.</p>
+    </div>
     <div class="catalog-top">
       <input type="text" class="search-input" id="prod-search" placeholder="Buscar produto..." />
       <div class="line-filters" id="line-filters">
@@ -1534,7 +1541,6 @@ var KITS = [
    Para adicionar nova notícia: inserir novo objeto no início do array.
    ==================================================== */
 var NEWS = [
-  {id:14,date:"2026-05-04",tag:"Regulação · ANVISA",stars:"⭐⭐⭐⭐⭐",headline:"ANVISA limita cúrcuma a 130mg/dia (IN 438/2026): o argumento que transforma o lojista em autoridade",summary:"A ANVISA publicou em 22/04/2026 a Instrução Normativa 438, que define 130mg/dia como limite máximo de curcumina em suplementos, exige nova advertência obrigatória no rótulo (gestantes, lactantes, crianças, hepatopatas) e dá 6 meses de prazo para adequação. A motivação foi o monitoramento pós-mercado, que apontou casos suspeitos de hepatotoxicidade. O cliente vai chegar com a notícia na cabeça — quem souber explicar a regra vira referência.",source:"ANVISA — Instrução Normativa nº 438/2026 / Agência Brasil, abril/2026",curto:8,medio:10,longo:7,idea:"'A ANVISA atualizou a regra da cúrcuma essa semana: até 130mg de curcumina por dia, com aviso no rótulo. Os nossos produtos seguem o limite — quem toma sem orientação às vezes passa do ponto, e é por isso que o alerta existe. Posso te mostrar a dose certa?'"},
   {id:13,date:"2026-04-30",tag:"Perfil do Consumidor",stars:"⭐⭐⭐⭐⭐",headline:"O cliente de suplementos de 2026: quem é, o que quer e como a Você Mais+ te coloca à frente",summary:"Predominantemente mulher (58%), 30-50 anos, renda média-alta, que chega à loja já tendo pesquisado. Quer confirmação, não descoberta. Paga mais por quem demonstra conhecimento real. Os lojistas que crescem viram consultores — não vendedores.",source:"ABIAD + Opinion Box — Comportamento de Compra Suplementos Brasil 2025",curto:10,medio:9,longo:8,idea:"Posicione-se como consultor: 'Antes de te indicar qualquer coisa, me conta o que você está buscando melhorar.' O cliente que é ouvido compra mais, volta mais e indica mais."},
   {id:1,date:"2026-04-25",tag:"Benefícios · Feminino",stars:"⭐⭐⭐⭐⭐",headline:"Creatina não é só pra academia: mulheres ganham foco, energia e disposição em 30 dias",summary:"Estudos da Universidade de Saskatchewan e do Journal of the International Society of Sports Nutrition confirmam que mulheres que suplementam creatina reportam melhora cognitiva em 71% dos casos, além dos benefícios musculares tradicionais. A grande maioria das clientes ainda associa creatina exclusivamente a homens e musculação — criando uma oportunidade enorme para o lojista que sabe apresentar corretamente.",source:"Journal of the International Society of Sports Nutrition / Univ. Saskatchewan, 2025",curto:9,medio:9,longo:8,idea:"'A creatina é o suplemento com mais pesquisas científicas do mundo — e para mulheres, o benefício vai muito além do músculo. Em 30 dias, a maioria relata mais foco, menos fadiga mental e energia mais estável. Quer experimentar?'"},
   {id:2,date:"2026-04-21",tag:"Como Vender · Magnésio",stars:"⭐⭐⭐⭐⭐",headline:"3 perguntas que fecham a venda de magnésio em menos de 2 minutos",summary:"Pesquisa do IBGE estima que mais de 70% dos brasileiros têm deficiência subclínica de magnésio sem saber. Isso significa que a maioria dos clientes que entra na loja já é candidata ao produto, independentemente do motivo da visita.",source:"IBGE Pesquisa de Orçamentos Familiares / Ministério da Saúde, 2024",curto:10,medio:10,longo:8,idea:"Roteiro: (1) 'Como está seu sono?' (2) 'Sente ansiedade ou tensão?' (3) 'Tem câimbra ou cansaço muscular?' — Uma resposta 'sim' já justifica a indicação do magnésio quelado."},
